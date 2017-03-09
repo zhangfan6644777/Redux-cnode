@@ -1,48 +1,28 @@
 const InitState = {
-	isCeshi: false,
+	isFetching: false,
 	data: []
 }
 
 const reducers = (state = {
-	data: []
+	isFetching: false,
+	page: 0,
+	scrollT: 0,
+	topics: []
 }, action) => {
 	let newState
 	switch (action.type) {
-		case 'REQUEST_INDEX':
-			//console.log('reducers')
-			//console.log(state)
-			state.data = action.playload
+		case 'REQUEST_TOPICS':
+			state.isFetching = true
 			newState = Object.assign({}, state)
 			return newState
 
-		case 'REQUEST_GOOD':
-			//console.log('reducers')
-			//console.log(state)
-			state.data = action.playload
+		case 'RECEIVE_TOPICS':
+			state.isFetching = false;
+			state.page: action.page,
+				state.topics: action.topics,
+				state.limit: action.limit
 			newState = Object.assign({}, state)
 			return newState
-
-		case 'REQUEST_SHARE':
-			//console.log('reducers')
-			//console.log(state)
-			state.data = action.playload
-			newState = Object.assign({}, state)
-			return newState
-
-		case 'REQUEST_ASK':
-			//console.log('reducers')
-			//console.log(state)
-			state.data = action.playload
-			newState = Object.assign({}, state)
-			return newState
-
-		case 'REQUEST_JOB':
-			//console.log('reducers')
-			//console.log(state)
-			state.data = action.playload
-			newState = Object.assign({}, state)
-			return newState
-
 		default:
 			return state
 	}

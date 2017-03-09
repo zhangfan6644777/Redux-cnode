@@ -19,3 +19,7 @@ http://localhost:8088/
 ```
 少写了一个break中断循环
 ```
+
+2017-3-9
+调整Tab内部结构 把逻辑都写在container里面 让component只起到渲染的作用  10:50
+把TAB切换的action合并  少些了N行代码  能合并的就合并  11:25
