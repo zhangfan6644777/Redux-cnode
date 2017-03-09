@@ -18,9 +18,9 @@ const reducers = (state = {
 
 		case 'RECEIVE_TOPICS':
 			state.isFetching = false;
-			state.page: action.page,
-				state.topics: action.topics,
-				state.limit: action.limit
+			state.page = action.page;
+			state.topics = action.topics;
+			state.limit = action.limit;
 			newState = Object.assign({}, state)
 			return newState
 		default:
