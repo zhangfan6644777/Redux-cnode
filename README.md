@@ -8,7 +8,7 @@ cnpm install
 npm run dev
 
 #浏览器访问
-http://localhost:8080/
+http://localhost:8088/
 
 #首先用antd design mobile
 
