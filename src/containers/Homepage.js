@@ -3,9 +3,8 @@ import {
   Icon
 } from 'antd-mobile';
 import React from 'react';
-/* eslint global-require: 0 */
-import Shenghuo from './index';
 
+import Shenghuo from './index';
 
 import {
   connect
@@ -27,7 +26,8 @@ class TabBarExample extends React.Component {
       state,
       dispatch
     } = this.props
-      //console.log(actions)
+    console.log(actions)
+    console.log('fule')
     if (pageText == '生活') {
       return (
         <Shenghuo state={state} actions={actions} dispatch={dispatch}/>

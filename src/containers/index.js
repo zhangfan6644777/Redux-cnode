@@ -42,8 +42,6 @@ class BottomNavigationExampleSimple extends React.Component {
 			dispatch
 		} = this.props
 			//console.log(actions)
-			//console.log('我的天啊')
-			//console.log(dispatch)
 		dispatch(actions.request_topic(''))
 	}
 
