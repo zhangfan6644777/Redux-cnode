@@ -49,6 +49,7 @@
     "material-ui": "^0.16.5",
     "postcss": "^5.2.15",
     "postcss-pxtorem": "^4.0.0",
+    "react-flip-move": "^2.9.1",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
