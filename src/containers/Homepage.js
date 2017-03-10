@@ -26,11 +26,11 @@ class TabBarExample extends React.Component {
       state,
       dispatch
     } = this.props
-    console.log(actions)
-    console.log('fule')
+      //console.log(this.props)
+      //console.log('wo fu le ')
     if (pageText == '生活') {
       return (
-        <Shenghuo state={state} actions={actions} dispatch={dispatch}/>
+        <Shenghuo state={state.Homepage} actions={actions} dispatch={dispatch}/>
       );
     }
 
