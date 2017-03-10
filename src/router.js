@@ -16,11 +16,13 @@ class routes extends React.Component {
 	render() {
 		return (
 			<Router history={hashHistory}>
-				<Route path='/' component={Homepage}></Route>
-				<Route path='/login' component={Login}></Route>
-				<Route path='/publish' component={PublishTopic}></Route>
-				<Route path='/message' component={Message}></Route>
-				<Route path='/topic' component={Topic}></Route>
+				<Route path='/' component={App}>
+					<IndexRoute component={Homepage}/>
+					<Route path='/login' component={Login}></Route>
+					<Route path='/publish' component={PublishTopic}></Route>
+					<Route path='/message' component={Message}></Route>
+					<Route path='/topic/:id' component={Topic}></Route>
+				</Route>	
 			</Router>
 
 		)

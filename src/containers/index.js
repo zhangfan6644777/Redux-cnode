@@ -13,10 +13,10 @@ let goodStats = true;
 let asktats = true;
 let jobStats = true;
 let shareStats = true;
-
+let presentState;
 let tab = [{
 	name: '全部',
-	tab: '',
+	tab: 'all',
 	key: 1
 }, {
 	name: '精华',
@@ -36,53 +36,48 @@ let tab = [{
 	key: 5
 }]
 class BottomNavigationExampleSimple extends React.Component {
+	componentWillMount() {
+
+	}
 	componentDidMount() {
+		//console.log(this.props)
+		//console.log("haha")
+		let {
+			actions,
+			dispatch,
+			state
+		} = this.props
+		let {
+			selectedTab
+		} = state
+		console.log(selectedTab)
+		dispatch(actions.request_topic(selectedTab))
+	}
+	componentWillReceiveProps(newProps) {
 		let {
 			actions,
 			dispatch
-		} = this.props
+		} = newProps
+		let {
+			topics,
+			isFetching
+		} = newProps.state.tabData
+		console.log(newProps)
+		console.log(newProps.state)
+		console.log('我是newProps')
 			//console.log(actions)
-		dispatch(actions.request_topic(''))
-	}
-
-	callback(key) {
-		switch (key) {
-			case '1':
-				//if (allStats) {
-				mYdispatch(myAction.request_topic(''));
-				//allStats = false
-				//}
-				break;
-			case '2':
-				//if (goodStats) {
-				console.log('不要请求啦');
-				mYdispatch(myAction.request_topic('good'));
-				//goodStats = false;
-				//};
-				break;
-			case '3':
-				//mYdispatch(myAction.request_share())
-				//if (shareStats) {
-				mYdispatch(myAction.request_topic('share'));
-				//shareStats = false
-				//}
-				break;
-			case '4':
-				//mYdispatch(myAction.request_ask())
-				//if (askStats) {
-				mYdispatch(myAction.request_topic('ask'));
-				//askStats = false
-				//}
-				break;
-			case '5':
-				//mYdispatch(myAction.request_job())
-				//if (jobStats) {
-				mYdispatch(myAction.request_topic('job'));
-				//jobStats = false
-				//}
-				break;
+		if (!isFetching && topics.length === 0) {
+			dispatch(actions.request_topic(newProps.state.selectedTab))
 		}
 
+	}
+	callback(key) {
+		mYdispatch(myAction.selectTab(tab[key - 1].tab))
+			//改变数据中selectTab
+		mYdispatch(myAction.recordScrollT(tab[key - 1].tab, 0))
+			//改变数据中的tabData 让他为空导致topics.length==0
+			//然后在去调用componentWillReceiveProps
+			//中的dispatch  此时正好fetching==false 
 	}
 	render() {
 		let {
@@ -92,7 +87,11 @@ class BottomNavigationExampleSimple extends React.Component {
 		} = this.props;
 		myAction = actions;
 		mYdispatch = dispatch;
-
+		//presentState = state;
+		//console.log(presentState)
+		console.log(state)
+		console.log(state.selectedTab)
+		console.log('wwwww')
 		return (
 			<div style={{height:document.documentElement.clientHeight-99}}>
 				<Header/>
@@ -101,7 +100,7 @@ class BottomNavigationExampleSimple extends React.Component {
 						{tab.map(function(index){
 							return (
 								<TabPane tab={index.name} key={index.key}>
-				       				<List state={state}/>
+				       				{index.tab==state.selectedTab&&state.tabData.topics?<List state={state} dispatch={dispatch} actions={actions}/>:<div></div>}		
 				      			</TabPane>
 							)
 						})}

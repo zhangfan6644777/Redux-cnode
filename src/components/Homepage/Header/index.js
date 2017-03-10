@@ -22,11 +22,10 @@ class header extends React.Component {
 		});
 	}
 	componentDidMount() {
-		console.log('我是DID')
-		console.log(this.refs.navbar)
+
 	}
 	render() {
-		console.log('我是render')
+
 		const sidebar = (
 			<div>
 				<p><img/></p>
