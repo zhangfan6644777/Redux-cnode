@@ -1,8 +1,10 @@
 import {
 	combineReducers
 } from 'redux';
-import Homepage from './Homepage';
+import Topic from './Topic';
+import Article from './Article';
 const InitReducers = combineReducers({
-	Homepage
+	Topic,
+	Article
 });
-export default InitReducers
+export default InitReducers;

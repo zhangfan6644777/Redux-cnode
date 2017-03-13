@@ -20,13 +20,11 @@ class list extends React.Component {
 
   }
   onrefresh() {
-    console.log('chuichucic')
+
   }
   render() {
     let {
-      state,
-      actions,
-      dispatch
+      state
     } = this.props
       //console.log(this.props)
       //let disableAllAnimations = topics.length === 20 ? false : true
@@ -41,17 +39,14 @@ class list extends React.Component {
         opacity: 1
       }
     }
-    console.log(this.props)
-    console.log(state)
-    console.log('wo qu ni ma ')
     return (
       <div>
       <RefreshControl onRefresh={this.onrefresh}></RefreshControl>
         <List className="my-list" >
           <FlipMove enterAnimation={enterAnimation} easing='ease-out' duration='400' staggerDelayBy='40' staggerDurationBy='4'>
-              {state.tabData.topics.map(function(index){
+              {state.map(function(index){
                 return(
-                  <Link key={index.id} to={`/topic/${index.id}`} style={{display:'block'}} >
+                  <Link key={index.id} to={`/arcitle/${index.id}`} style={{display:'block'}} >
                     <Item  extra={index.create_at.substring(0,10)} align="bottom" thumb={index.author.avatar_url} multipleLine>
                       {index.title}<Brief>{index.reply_count}/{index.visit_count} 分享</Brief>
                     </Item>

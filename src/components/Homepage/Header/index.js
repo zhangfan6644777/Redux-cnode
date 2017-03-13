@@ -40,7 +40,7 @@ class header extends React.Component {
 		};
 		return (<div>
 		<NavBar iconName="ellipsis" onLeftClick={this.onOpenChange.bind(this)} rightContent={[
-        <Icon badge={1} key="0" type="search" style={{ marginRight: '0.32rem' }} />,
+        <Icon  key="0" type="search" style={{ marginRight: '0.32rem' }} />,
       ]} >基本</NavBar>
       <Drawer
         className="my-drawer"

@@ -6,7 +6,6 @@ let actions = {
 	request_topic: (tab, page = 1, limit = 15) => (dispatch, getState) => {
 		let url = `https://cnodejs.org/api/v1/topics?tab=${tab}&page=${page}&limit=${limit}`;
 		if (getState().isFetching) return
-		console.log(url)
 		dispatch(actions.requestTopic(tab))
 		fetch(url).then(function(res) {
 			return res.json()
@@ -32,20 +31,24 @@ let actions = {
 			scrollT
 		})
 	},
-	request_article: (id, request = true) => (dispatch, getState) => {
+	request_article: (id) => (dispatch, getState) => {
 		let url = `https://cnodejs.org/api/v1/topic/${id}`;
-		//dispatch()
+		if (getState().isFetching) return
+		dispatch(actions.requestArticle())
 		fetch(url).then(function(res) {
 			return res.json()
 		}).then(function(data) {
-			console.log(111)
+			dispatch(actions.receiveArticle(data.data, id))
 		}).catch(e => console.log(e))
 	},
-	requestArticle: () => ({
-		type: 'REQUEST_ARTICLE'
+	requestArticle: (id) => ({
+		type: 'REQUEST_ARTICLE',
+		id
 	}),
-	receiveArticle: () => ({
-		type: 'RECEIVE_ARTICLE'
+	receiveArticle: (data, id) => ({
+		type: 'RECEIVE_ARTICLE',
+		data,
+		id
 	})
 }
 export default actions

@@ -59,7 +59,7 @@ const tabData = (state = {}, action) => {
 
 
 
-const homePage = (state = {
+const Topic = (state = {
 	selectedTab: 'all',
 	tabData: {
 
@@ -81,4 +81,4 @@ const homePage = (state = {
 	}
 	return state
 }
-export default homePage
+export default Topic
