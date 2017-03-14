@@ -31,7 +31,7 @@ class Article extends React.Component {
 				<NavBar  onLeftClick={() => history.go(-1)}>
 					详情
     			</NavBar>
-    			{state.data.good?<div><Content state={state.data.content}/><Comment state={state.data.replies}/></div>:<ActivityIndicator size="large" />}
+    			{state.data.id?<div><Content state={state.data}/><Comment state={state.data}/></div>:<ActivityIndicator size="large" />}
 			</div>
 		)
 	}

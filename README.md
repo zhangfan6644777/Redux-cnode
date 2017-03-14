@@ -29,3 +29,6 @@ http://localhost:8088/
 
 2017-3-10
 必须添加一个父路由 目的是为了设置一个登陆的状态贯穿全局
+
+
+react里面用dangerouslySetInnerHTML 将html字符串变成dom
