@@ -15,7 +15,6 @@ class Content extends React.Component {
 
 		return (
 			<div className='markdown-body' dangerouslySetInnerHTML={{__html:state.content}}></div>
-
 		)
 	}
 }

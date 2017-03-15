@@ -18,7 +18,6 @@ class Article extends React.Component {
 			dispatch,
 			params
 		} = this.props;
-
 		dispatch(actions.request_article(params.id))
 	}
 	render() {

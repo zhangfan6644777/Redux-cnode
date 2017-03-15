@@ -1,5 +1,4 @@
 const TopicReducers = (state = {
-	currentTopicId: '',
 	isFecthing: false,
 	data: {}
 }, action) => {
@@ -8,6 +7,7 @@ const TopicReducers = (state = {
 		case 'REQUEST_ARTICLE':
 			console.log('开始请求')
 			state.isFecthing = true;
+			state.data = {}
 			newState = Object.assign({}, state)
 			return newState
 		case 'RECEIVE_ARTICLE':
