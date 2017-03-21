@@ -124,7 +124,7 @@ class Index extends React.Component {
         </TabBar.Item>
         
         <TabBar.Item
-          icon={{ uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' }}
+          icon={require('../images/index.svg')}
           selectedIcon={{ uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' }}
           title="我的"
           key="我的"
