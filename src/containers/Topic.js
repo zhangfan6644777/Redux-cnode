@@ -48,7 +48,7 @@ class HomePage extends React.Component {
 		let {
 			selectedTab
 		} = state
-		console.log(selectedTab)
+		//console.log(selectedTab)
 		dispatch(actions.request_topic(selectedTab))
 	}
 	componentWillReceiveProps(newProps) {
@@ -56,14 +56,14 @@ class HomePage extends React.Component {
 			actions,
 			dispatch
 		} = newProps;
-		console.log('我是newProps')
-		console.log(newProps)
+		//console.log('我是newProps')
+		//console.log(newProps)
 		let {
 			topics,
 			isFetching
 		} = newProps.state.tabData
 
-		console.log(newProps.state)
+		//console.log(newProps.state)
 
 		//console.log(actions)
 		if (!isFetching && topics.length === 0) {
@@ -89,9 +89,9 @@ class HomePage extends React.Component {
 		mYdispatch = dispatch;
 		//presentState = state;
 		//console.log(presentState)
-		console.log(this.props)
+		//console.log(this.props)
 
-		console.log('wwwww')
+		//console.log('wwwww')
 		return (
 			<div style={{height:document.documentElement.clientHeight-99}}>
 				<Header/>
@@ -113,8 +113,8 @@ class HomePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-	console.log(state)
-	console.log("tian")
+	//console.log(state)
+	//console.log("tian")
 	return {
 		state: state.Topic
 	}

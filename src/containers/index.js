@@ -10,6 +10,7 @@ import actions from '../actions/actions';
 import Topic from './Topic';
 import PublishTopic from './PublishTopic';
 import Message from './Message';
+import Login from './Login';
 class Index extends React.Component {
 
   constructor(props) {
@@ -40,7 +41,7 @@ class Index extends React.Component {
       )
     } else if (pageText == '我的') {
       return (
-        <PublishTopic actions={actions} />
+        <Login actions={actions} />
       )
     }
 

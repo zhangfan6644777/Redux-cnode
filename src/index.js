@@ -5,14 +5,16 @@ import {
 } from 'react-redux';
 import {
 	createStore,
-	applyMiddleware
+	applyMiddleware,
+	compose
 } from 'redux';
 import reducers from './reducers/index';
 import Router from './router';
 
-import thunk from 'redux-thunk'
+import thunk from 'redux-thunk';
 
 let store = createStore(reducers, applyMiddleware(thunk));
+
 ReactDOM.render(
 	<Provider store={store}>
 		<Router/>

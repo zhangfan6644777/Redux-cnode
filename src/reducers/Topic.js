@@ -18,16 +18,16 @@ const tabDataItem = (state = {
 	let newState
 	switch (action.type) {
 		case 'REQUEST_TOPICS':
-			console.log(state)
+			//console.log(state)
 			state.isFetching = true;
-			console.log("请求开始")
+			//console.log("请求开始")
 			newState = Object.assign({}, state)
 			return newState
 
 		case 'RECEIVE_TOPICS':
 			state.isFetching = false;
 			state.page = action.page;
-			console.log("请求结束")
+			//console.log("请求结束")
 			state.topics = action.topics;
 			state.limit = action.limit;
 			newState = Object.assign({}, state)
@@ -44,9 +44,9 @@ const tabData = (state = {}, action) => {
 		case 'RECEIVE_TOPICS':
 		case 'REQUEST_TOPICS':
 		case 'RECORD_SCROLLT':
-			console.log(action.tab)
-			console.log('这是啥啊')
-			console.log(tabDataItem(state[action.tab], action));
+			//console.log(action.tab)
+			//console.log('这是啥啊')
+			//console.log(tabDataItem(state[action.tab], action));
 			let newState;
 			state = tabDataItem(state[action.tab], action)
 			newState = Object.assign({}, state)

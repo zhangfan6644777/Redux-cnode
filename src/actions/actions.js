@@ -1,4 +1,5 @@
 let actions = {
+	//Topic
 	selectTab: tab => ({
 		type: 'SELECT_TAB',
 		tab
@@ -31,6 +32,8 @@ let actions = {
 			scrollT
 		})
 	},
+
+	//Article
 	request_article: (id) => (dispatch, getState) => {
 		let url = `https://cnodejs.org/api/v1/topic/${id}`;
 		if (getState().isFetching) return
@@ -49,6 +52,42 @@ let actions = {
 		type: 'RECEIVE_ARTICLE',
 		data,
 		id
+	}),
+	//Access_Token
+	request_AccessToken: (access_token) => (dispatch, getState) => {
+		//7d97b9fb-4e23-40df-a90b-d6cc31b84fcd
+		let url = 'https://cnodejs.org/api/v1/accesstoken'
+		fetch(url, {
+				method: 'POST',
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded"
+				},
+				body: `accesstoken=${access_token}`
+			})
+			.then(function(res) {
+				return res.json()
+			})
+			.then(function(data) {
+				console.log(data)
+				if (data.success) {
+					dispatch(actions.successLogin(access_token, data.loginname, data.id))
+				} else {
+					dispatch(actions.failLogin(data.error_msg))
+				}
+			})
+	},
+	successLogin: (accesstoken, loginname, id) => ({
+		type: 'SUCCESS_LOGIN',
+		accesstoken,
+		loginname,
+		id
+	}),
+	failLogin: (error_msg) => ({
+		type: 'FAIL_LOGIN',
+		error_msg
+	}),
+	loginOut: () => ({
+		type: 'LOG_OUT'
 	})
 }
 export default actions
