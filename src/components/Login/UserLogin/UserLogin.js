@@ -10,11 +10,11 @@ class UserLogin extends React.Component {
 		this.props.login(access_token)
 	}
 	render() {
-		console.log(this.props.state)
+		//console.log(this.props.state)
 		return (
 			<List style={{margin:60,marginTop:350}}>
     				<List.Item>
-						<InputItem ref='input' placeholder='Access Token' style={{border:'1px solid #CCC'}}/>
+						<InputItem ref='input' value='7d97b9fb-4e23-40df-a90b-d6cc31b84fcd' placeholder='Access Token' style={{border:'1px solid #CCC'}}/>
 						<Button onClick={()=>{
 							const access_token=this.refs.input.refs.input.value;
 							this.login(access_token)

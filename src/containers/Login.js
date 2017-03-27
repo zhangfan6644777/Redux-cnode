@@ -9,6 +9,7 @@ import {
 	List,
 	Icon
 } from 'antd-mobile';
+let qqqqq = true;
 import UserInfo from '../components/Login/UserInfo/UserInfo';
 import UserLogin from '../components/Login/UserLogin/UserLogin';
 class Login extends React.Component {
@@ -19,13 +20,23 @@ class Login extends React.Component {
 	componentWillReceiveProps(newProps) {
 		console.log('我是newProps')
 		console.log(newProps)
-			//dispatch(actions.request_userInfo())
+		let {
+			actions,
+			dispatch,
+			state
+		} = newProps
+		//console.log(actions)
+		if (qqqqq) {
+			dispatch(actions.request_UserInfo(newProps.state.Login.loginname));
+			qqqqq = false;
+		}
+
 	}
 	login(access_token) {
 		let {
 			actions,
 			dispatch,
-		} = this.props
+		} = this.props;
 		dispatch(actions.request_AccessToken(access_token))
 	}
 	logout() {
@@ -33,50 +44,25 @@ class Login extends React.Component {
 			actions,
 			dispatch,
 		} = this.props
-		console.log(this)
+			//console.log(this)
 		dispatch(actions.loginOut())
 	}
 	render() {
-		//console.log(this.props)
 		let _this = this;
 		let {
 			actions,
 			dispatch,
 			state
 		} = this.props
-
-		let userInfo = (
-			<div className='userInfo' style={{backgroundColor:'#108ee9',width:'100%',height:400,color:'#FFF'}}>
-				<div>
-					<div >22</div>
-					<div>
-						<p>1111</p>
-						<p>
-							<span>积分:</span>
-							<span>注册于</span>
-						</p>
-					</div>
-				</div>
-			</div>
-		);
-		let login = (
-			<List style={{margin:60,marginTop:350}}>
-    				<List.Item>
-						<InputItem ref='input' placeholder='Access Token' style={{border:'1px solid #CCC'}}/>
-						<Button onClick={()=>{
-							const access_token=this.refs.input.refs.input.value;
-							dispatch(actions.request_AccessToken(access_token))
-						}} type="primary" style={{marginTop:40}}>登录</Button>
-					</List.Item>
-				</List>
-		)
+		console.log(state)
+		console.log('123')
 		return (
 			<div>
-				<NavBar  onLeftClick={() => history.go(-1)} rightContent={
+				<NavBar rightContent={
         			<Icon onClick={this.logout.bind(this)} size='md' type={require('../images/logout.svg')} style={{ marginRight: '0.1rem' }} />}>
 					个人中心
     			</NavBar>
-    			{this.props.state.success?<UserInfo state={state}  />:<UserLogin login={this.login.bind(this)} state={state}/>}
+    			{state.Login.success?<UserInfo state={state.UserInfo}  />:<UserLogin login={this.login.bind(this)} state={state}/>}
 			</div>
 		)
 	}
@@ -85,7 +71,7 @@ class Login extends React.Component {
 function LoginSelect(state) {
 	//console.log(state)
 	return {
-		state: state.Login
+		state: state
 	}
 }
 export default connect(LoginSelect)(Login)

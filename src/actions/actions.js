@@ -56,6 +56,7 @@ let actions = {
 	//Access_Token
 	request_AccessToken: (access_token) => (dispatch, getState) => {
 		//7d97b9fb-4e23-40df-a90b-d6cc31b84fcd
+		//if (getState().isFetching) return
 		let url = 'https://cnodejs.org/api/v1/accesstoken'
 		fetch(url, {
 				method: 'POST',
@@ -88,6 +89,26 @@ let actions = {
 	}),
 	loginOut: () => ({
 		type: 'LOG_OUT'
+	}),
+	//UserInfo
+	request_UserInfo: (loginname) => (dispatch, getState) => {
+		if (getState().isFetching) return
+		dispatch(actions.requestUserInfo());
+		fetch(`https://cnodejs.org/api/v1/user/${loginname}`)
+			.then(res => res.json())
+			.then(data => {
+				console.log(data);
+				dispatch(actions.receiveUserInfo(loginname, data.data))
+			})
+	},
+	requestUserInfo: (loginname) => ({
+		type: 'REQUEST_USERINFO',
+		loginname
+	}),
+	receiveUserInfo: (loginname, userinfo) => ({
+		type: 'RECEIVE_USERINFO',
+		loginname,
+		userinfo
 	})
 }
 export default actions
