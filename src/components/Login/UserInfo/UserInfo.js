@@ -42,7 +42,7 @@ class UserInfo extends React.Component {
 				           <ul className='userTopic'>
 				           {state.userInfo.recent_topics.map(function(index,key){
 				           	return(
-									<Link key={key} to={`/arcitle/${index.id}`}><li>{index.title}<span>{GetTime.getTime(new Date(),index.last_reply_at)}</span></li></Link>
+									<Link key={key} to={`/arcitle/${index.id}`}><li><p>{index.title}</p><p>{GetTime.getTime(new Date(),index.last_reply_at)}</p></li></Link>
 				           		)
 				           })}
 				           </ul>
@@ -53,7 +53,18 @@ class UserInfo extends React.Component {
 				           <ul className='userTopic'>
 				           {state.userInfo.recent_replies.map(function(index,key){	
 				           	return(
-				           			<Link key={key} to={`/arcitle/${index.id}`}><li>{index.title}<span>{GetTime.getTime(new Date(),index.last_reply_at)}</span></li></Link>
+				           			<Link key={key} to={`/arcitle/${index.id}`}><li><p>{index.title}</p><p>{GetTime.getTime(new Date(),index.last_reply_at)}</p></li></Link>
+				           		)
+				           })}
+				           </ul>
+				        </div>
+				    </TabPane>
+				    <TabPane tab="我收藏的话题" key="3">
+				        <div style={{ display: 'flex', backgroundColor: '#fff',height:'7.5rem' }}>
+				           <ul className='userTopic'>
+				           {state.collect.map(function(index,key){	
+				           	return(
+				           			<Link key={key} to={`/arcitle/${index.id}`}><li><p>{index.title}</p><p>{GetTime.getTime(new Date(),index.last_reply_at)}</p></li></Link>
 				           		)
 				           })}
 				           </ul>

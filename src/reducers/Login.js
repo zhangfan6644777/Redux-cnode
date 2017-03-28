@@ -19,7 +19,7 @@ const LoginReducers = (state = {
 			state.failmessage = action.error_msg;
 			newState = Object.assign({}, state)
 			return newState
-		case 'LOGOUT':
+		case 'LOG_OUT':
 			state = {};
 			state.success = false;
 			newState = Object.assign({}, state)

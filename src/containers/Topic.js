@@ -87,16 +87,12 @@ class HomePage extends React.Component {
 		} = this.props;
 		myAction = actions;
 		mYdispatch = dispatch;
-		//presentState = state;
-		//console.log(presentState)
-		//console.log(this.props)
 
-		//console.log('wwwww')
 		return (
 			<div style={{height:document.documentElement.clientHeight-99}}>
 				<Header/>
       			<div>
-				    <Tabs defaultActiveKey="1" onChange={this.callback}>
+				    <Tabs defaultActiveKey="1" animated={false} onChange={this.callback}>
 						{tab.map(function(index){
 							return (
 								<TabPane tab={index.name} key={index.key}>

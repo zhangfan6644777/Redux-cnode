@@ -4,7 +4,7 @@ import {
 	Button,
 	InputItem
 } from 'antd-mobile';
-
+require('./UserLogin.less')
 class UserLogin extends React.Component {
 	login(access_token) {
 		this.props.login(access_token)
