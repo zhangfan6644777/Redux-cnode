@@ -7,8 +7,10 @@ import {
 	InputItem,
 	Button,
 	List,
-	Icon
+	Icon,
+	Modal
 } from 'antd-mobile';
+const alert = Modal.alert;
 let qqqqq = true;
 import UserInfo from '../components/Login/UserInfo/UserInfo';
 import UserLogin from '../components/Login/UserLogin/UserLogin';
@@ -25,10 +27,19 @@ class Login extends React.Component {
 			dispatch,
 			state
 		} = newProps
-		//console.log(actions)
-		if (qqqqq) {
-			dispatch(actions.request_UserInfo(newProps.state.Login.loginname));
-			qqqqq = false;
+		if (window.localStorage.getItem('masterInfo')) {
+			return
+		} else {
+			let accesstoken = state.Login.accesstoken
+			let loginname = state.Login.loginname
+			let userInfo = JSON.stringify({
+				accesstoken,
+				loginname
+			})
+			if (userInfo === '{}') return
+			window.localStorage.setItem('masterInfo', userInfo);
+			dispatch(actions.request_UserInfo(loginname));
+			dispatch(actions.request_Message(accesstoken));
 		}
 
 	}
@@ -44,8 +55,8 @@ class Login extends React.Component {
 			actions,
 			dispatch,
 		} = this.props
-			//console.log(this)
-		dispatch(actions.loginOut())
+		window.localStorage.removeItem('masterInfo');
+		dispatch(actions.loginOut());
 	}
 	render() {
 		let _this = this;
@@ -59,7 +70,10 @@ class Login extends React.Component {
 		return (
 			<div>
 				<NavBar rightContent={
-        			<Icon onClick={this.logout.bind(this)} size='md' type={require('../images/logout.svg')} style={{ marginRight: '0.1rem' }} />}>
+        			<Icon onClick={() => alert('退出', '确定退出么???', [
+      { text: '取消', onPress: () => console.log('cancel') },
+      { text: '确定', onPress: () => this.logout(), style: { fontWeight: 'bold' } },
+    ])} size='md' type={require('../images/logout.svg')} style={{ marginRight: '0.1rem',display:state.Login.success?'block':'none' }} />}>
 					个人中心
     			</NavBar>
     			{state.Login.success?<UserInfo state={state.UserInfo}  />:<UserLogin login={this.login.bind(this)} state={state}/>}
@@ -69,7 +83,6 @@ class Login extends React.Component {
 }
 
 function LoginSelect(state) {
-	//console.log(state)
 	return {
 		state: state
 	}

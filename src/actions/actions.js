@@ -90,10 +90,11 @@ let actions = {
 	loginOut: () => ({
 		type: 'LOG_OUT'
 	}),
-	//UserInfo
+	//UserInfo 个人信息和收藏的主题
 	request_UserInfo: (loginname) => (dispatch, getState) => {
 		if (getState().isFetching) return
-		dispatch(actions.requestUserInfo());
+		dispatch(actions.requestUserInfo(loginname));
+		dispatch(actions.request_Collection(loginname));
 		fetch(`https://cnodejs.org/api/v1/user/${loginname}`)
 			.then(res => res.json())
 			.then(data => {
@@ -109,6 +110,34 @@ let actions = {
 		type: 'RECEIVE_USERINFO',
 		loginname,
 		userinfo
+	}),
+	request_Collection: (loginname) => (dispatch, getState) => {
+		fetch(`https://cnodejs.org/api/v1/topic_collect/${loginname}`)
+			.then(res => res.json())
+			.then(data => {
+				console.log(data.data);
+				console.log('111111')
+				dispatch(actions.receiveCollection(loginname, data.data))
+			})
+	},
+	receiveCollection: (loginname, collectlist) => ({
+		type: 'RECEIVE_COLLECTION',
+		loginname,
+		collectlist
+	}),
+	//Message
+	request_Message: (access_token) => (dispatch, getState) => {
+		fetch(`https://cnodejs.org/api/v1/messages?accesstoken=${access_token}`)
+			.then(res => res.json())
+			.then(data => {
+				console.log(data.data)
+				dispatch(actions.receiveMessage(data.data.has_read_messages, data.data.hasnot_read_messages))
+			})
+	},
+	receiveMessage: (has_read_messages, hasnot_read_messages) => ({
+		type: 'RECEIVE_MESSAGE',
+		has_read_messages,
+		hasnot_read_messages
 	})
 }
 export default actions

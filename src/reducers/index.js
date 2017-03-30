@@ -5,10 +5,12 @@ import Topic from './Topic';
 import Article from './Article';
 import Login from './Login';
 import UserInfo from './UserInfo';
+import Message from './Message'
 const InitReducers = combineReducers({
 	Topic,
 	Login,
 	Article,
-	UserInfo
+	UserInfo,
+	Message
 });
 export default InitReducers;

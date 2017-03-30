@@ -5,6 +5,22 @@ import {
 import actions from '../actions/actions'
 //在这里面主要是需要一个登陆的状态贯穿全局
 class App extends React.Component {
+	componentWillMount() {
+		console.log(this.props)
+		let {
+			dispatch
+		} = this.props;
+
+		if (window.localStorage.getItem('masterInfo')) {
+			//console.log(window.localStorage.getItem('masterInfo'))
+			const userInfo = JSON.parse(window.localStorage.getItem('masterInfo'));
+			//console.log('masterInfo')
+			dispatch(actions.request_AccessToken(userInfo.accesstoken))
+			dispatch(actions.request_UserInfo(userInfo.loginname));
+			dispatch(actions.request_Message(userInfo.accesstoken));
+
+		}
+	}
 	render() {
 		let {
 			state,
