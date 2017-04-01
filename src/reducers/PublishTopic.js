@@ -9,13 +9,17 @@ const PublishTopicReducers = (state = {
 		case 'REQUEST_PUBLISHTOPIC':
 			console.log('kaishi')
 			state.isFetching = true;
-			newState = Object.assign({}, state)
+			newState = Object.assign({}, state);
+			Toast.loading('发布中...', 1, () => {
+				console.log('加载完成!!!');
+			});
 			return newState
 		case 'RECEIVE_PUBLISHTOPIC':
 			state.isFetching = false;
 			state.topic_id = action.topic_id;
 			state.success = action.success;
-			newState = Object.assign({}, state)
+			newState = Object.assign({}, state);
+			Toast.success('发布成功!!!', 1);
 			return newState
 		case 'FAIL_PUBLISHTOPIC':
 			state.isFetching = false;

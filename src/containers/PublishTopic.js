@@ -35,6 +35,8 @@ class Test extends React.Component {
 			modal1: false,
 			modal2: false,
 			modal3: false,
+			modal4: false,
+			modal5: false,
 		};
 	}
 	publish(accesstoken, select, title, content) {
@@ -94,50 +96,81 @@ class Test extends React.Component {
         			const content=getFieldProps('content').value;
 
         			const select=getFieldProps('select').value;
+        			//console.log(title)
+        			//console.log(content)
         			if(!select){
+        				//console.log(select)
         				this.showModal('modal1');
         				return
-        			}else if(title.length<=3){
-        				console.log(title.length)
-        				this.showModal('modal2');
-        			}else if(content.length<=5){
-        				console.log(content.length)
+        			}else if(!title){
+        				this.showModal('modal2')
+        				return
+        			}else if(title.hasOwnProperty('length')&&title.length<=3){
+        				//console.log(title.length)
         				this.showModal('modal3');
+        				return
+        			}else if(!content){
+        				this.showModal('modal4')
+        				return
+        			}else if(content.length<=5){
+        				//console.log(content.length)
+        				this.showModal('modal5');
+        				return
         			}
-        			console.log(this)
+        			//console.log(this)
         			const accesstoken=Login.accesstoken
         			this.publish(accesstoken,select.toString(),title,content)
         			}} className="btn" type="primary" style={{margin:'10%',width:'80%'}}>发布</Button>
 					<Modal
-			          title="这是 title"
+			          title="发布失败"
 			          transparent
 			          maskClosable={false}
 			          visible={this.state.modal1}
 			          onClose={()=>this.onClose('modal1')}
 			          footer={[{ text: '确定', onPress: () => { console.log('ok'); this.onClose('modal1'); } }]}
 			        >
-			          没选择<br/>
+			          没选择发布类型<br/>
 			         </Modal>
 			         <Modal
-			          title="这是 title"
+			          title="发布失败"
 			          transparent
 			          maskClosable={false}
-			          visible={this.state.modal1}
+			          visible={this.state.modal2}
 			          onClose={()=>this.onClose('modal2')}
-			          footer={[{ text: '确定', onPress: () => { console.log('ok'); this.onClose('modal1'); } }]}
-			        >
-			          这是标题字数不够<br/>
-			         </Modal>
-			         <Modal
-			          title="这是 title"
+			          footer={[{ text: '确定', onPress: () => { console.log('ok'); this.onClose('modal2'); } }]}
+			          >
+			          标题不能为空<br/>
+			          </Modal>
+			          <Modal
+			          title="发布失败"
 			          transparent
 			          maskClosable={false}
-			          visible={this.state.modal1}
+			          visible={this.state.modal3}
 			          onClose={()=>this.onClose('modal3')}
-			          footer={[{ text: '确定', onPress: () => { console.log('ok'); this.onClose('modal1'); } }]}
-			        >
-			          内容太少<br />
-			         </Modal>
+			          footer={[{ text: '确定', onPress: () => { console.log('ok'); this.onClose('modal3'); } }]}
+			          >
+			          标题字数太少<br />
+			          </Modal>
+			          <Modal
+			          title="发布失败"
+			          transparent
+			          maskClosable={false}
+			          visible={this.state.modal4}
+			          onClose={()=>this.onClose('modal4')}
+			          footer={[{ text: '确定', onPress: () => { console.log('ok'); this.onClose('modal4'); } }]}
+			          >
+			          内容不能为空<br />
+			          </Modal>
+			          <Modal
+			          title="发布失败"
+			          transparent
+			          maskClosable={false}
+			          visible={this.state.modal5}
+			          onClose={()=>this.onClose('modal5')}
+			          footer={[{ text: '确定', onPress: () => { console.log('ok'); this.onClose('modal5'); } }]}
+			          >
+			          内容字数太少<br />
+			          </Modal>
 			</div>
 		)
 	}

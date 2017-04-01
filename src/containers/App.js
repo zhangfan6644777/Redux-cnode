@@ -2,11 +2,11 @@ import React from 'react';
 import {
 	connect
 } from 'react-redux';
-import actions from '../actions/actions'
+import actions from '../actions/actions';
+let width = document.documentElement.clientWidth;
 //在这里面主要是需要一个登陆的状态贯穿全局
 class App extends React.Component {
 	componentWillMount() {
-		console.log(this.props)
 		let {
 			dispatch
 		} = this.props;
@@ -28,7 +28,7 @@ class App extends React.Component {
 		} = this.props
 
 		return (
-			<div>{this.props.children}</div>
+			<div style={{width:'100%'}}>{this.props.children}</div>
 		)
 	}
 }

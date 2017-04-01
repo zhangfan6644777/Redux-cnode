@@ -11,13 +11,11 @@ const UserInfoReducers = (state = {
 			return newState
 		case 'RECEIVE_USERINFO':
 			console.log('请求成功')
-
 			state.isFetching = false;
 			state.userInfo = action.userinfo
 			newState = Object.assign({}, state)
 			return newState
 		case 'RECEIVE_COLLECTION':
-			//alert('收藏')
 			state.collect = action.collectlist;
 			newState = Object.assign({}, state)
 			return newState

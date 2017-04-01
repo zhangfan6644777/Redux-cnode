@@ -53,6 +53,26 @@ let actions = {
 		data,
 		id
 	}),
+	request_upComment: (accessToken, replyId, key, replydata) => (dispatch, getState) => {
+		fetch(`https://cnodejs.org/api/v1/reply/${replyId}/ups`, {
+				method: 'POST',
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded"
+				},
+				body: `accesstoken=${accessToken}`
+			})
+			.then(res => res.json())
+			.then(data => {
+				//dispatch(actions())
+				dispatch({
+					type: 'UP_COMMENT',
+					data: data,
+					key: key,
+					reply: replydata,
+					replyId: replyId
+				})
+			})
+	},
 	//Access_Token
 	request_AccessToken: (access_token) => (dispatch, getState) => {
 		//7d97b9fb-4e23-40df-a90b-d6cc31b84fcd
@@ -69,7 +89,6 @@ let actions = {
 				return res.json()
 			})
 			.then(function(data) {
-				console.log(data)
 				if (data.success) {
 					dispatch(actions.successLogin(access_token, data.loginname, data.id))
 				} else {
@@ -90,14 +109,14 @@ let actions = {
 	loginOut: () => ({
 		type: 'LOG_OUT'
 	}),
-	//UserInfo
+	//UserInfo 个人信息和收藏的主题
 	request_UserInfo: (loginname) => (dispatch, getState) => {
 		if (getState().isFetching) return
-		dispatch(actions.requestUserInfo());
+		dispatch(actions.requestUserInfo(loginname));
+		dispatch(actions.request_Collection(loginname));
 		fetch(`https://cnodejs.org/api/v1/user/${loginname}`)
 			.then(res => res.json())
 			.then(data => {
-				console.log(data);
 				dispatch(actions.receiveUserInfo(loginname, data.data))
 			})
 	},
@@ -109,6 +128,66 @@ let actions = {
 		type: 'RECEIVE_USERINFO',
 		loginname,
 		userinfo
+	}),
+	request_Collection: (loginname) => (dispatch, getState) => {
+		fetch(`https://cnodejs.org/api/v1/topic_collect/${loginname}`)
+			.then(res => res.json())
+			.then(data => {
+				dispatch(actions.receiveCollection(loginname, data.data))
+			})
+	},
+	receiveCollection: (loginname, collectlist) => ({
+		type: 'RECEIVE_COLLECTION',
+		loginname,
+		collectlist
+	}),
+	//Message
+	request_Message: (access_token) => (dispatch, getState) => {
+		fetch(`https://cnodejs.org/api/v1/messages?accesstoken=${access_token}`)
+			.then(res => res.json())
+			.then(data => {
+				dispatch(actions.receiveMessage(data.data.has_read_messages, data.data.hasnot_read_messages))
+			})
+	},
+	receiveMessage: (has_read_messages, hasnot_read_messages) => ({
+		type: 'RECEIVE_MESSAGE',
+		has_read_messages,
+		hasnot_read_messages
+	}),
+	//PublishTopic
+	request_PublishTopic: (accesstoken, select, title, content) => (dispatch, getState) => {
+		if (getState().isFetching) return
+		const body = `accesstoken=${accesstoken}&tab=${select}&content=${content}&title=${title}`
+		dispatch(actions.requestPublishTopic())
+		fetch(`https://cnodejs.org/api/v1/topics`, {
+				method: 'POST',
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded"
+				},
+				body: body
+			})
+			.then(res => res.json())
+			.then(data => {
+				if (data.success) {
+					dispatch(actions.receivePublishTopic(data.success, data.topic_id));
+				} else {
+					dispatch(actions.failPublishTopic(data.success, data.error_msg));
+				}
+			})
+	},
+	requestPublishTopic: () => ({
+		type: 'REQUEST_PUBLISHTOPIC'
+	}),
+	receivePublishTopic: (success, topic_id) => ({
+		type: 'RECEIVE_PUBLISHTOPIC',
+		success,
+		topic_id
+
+	}),
+	failPublishTopic: (success, error_msg) => ({
+		type: 'FAIL_PUBLISHTOPIC',
+		success,
+		error_msg
 	})
 }
 export default actions

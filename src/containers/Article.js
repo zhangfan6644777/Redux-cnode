@@ -22,7 +22,9 @@ class Article extends React.Component {
 	}
 	render() {
 		let {
-			state
+			Article,
+			Login,
+			dispatch
 		} = this.props;
 		console.log(this.props)
 		return (
@@ -30,15 +32,20 @@ class Article extends React.Component {
 				<NavBar  onLeftClick={() => history.go(-1)}>
 					详情
     			</NavBar>
-    			{state.data.id?<div><Content state={state.data}/><Comment state={state.data}/></div>:<ActivityIndicator size="large" />}
+    			{Article.data.id?<div><Content Article={Article}/><Comment dispatch={dispatch} actions={actions} Article={Article} Login={Login}/></div>:<ActivityIndicator size="large" />}
 			</div>
 		)
 	}
 }
 
 function ArticleSelect(state) {
+	let {
+		Article,
+		Login
+	} = state
 	return {
-		state: state.Article
+		Article,
+		Login
 	}
 }
 export default connect(ArticleSelect)(Article)

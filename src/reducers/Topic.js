@@ -44,9 +44,6 @@ const tabData = (state = {}, action) => {
 		case 'RECEIVE_TOPICS':
 		case 'REQUEST_TOPICS':
 		case 'RECORD_SCROLLT':
-			//console.log(action.tab)
-			//console.log('这是啥啊')
-			//console.log(tabDataItem(state[action.tab], action));
 			let newState;
 			state = tabDataItem(state[action.tab], action)
 			newState = Object.assign({}, state)
@@ -65,9 +62,6 @@ const Topic = (state = {
 
 	}
 }, action) => {
-	//console.log("哈哈")
-	//console.log(action.type)
-	//console.log(state)
 	let newState;
 	if (state) {
 		const sTab = selectedTab(state.selectedTab, action);
