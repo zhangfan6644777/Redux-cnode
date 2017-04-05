@@ -32,7 +32,7 @@ class Article extends React.Component {
 				<NavBar  onLeftClick={() => history.go(-1)}>
 					详情
     			</NavBar>
-    			{Article.data.id?<div><Content Article={Article}/><Comment dispatch={dispatch} actions={actions} Article={Article} Login={Login}/></div>:<ActivityIndicator size="large" />}
+    			{Article.data.id?<div><Content dispatch={dispatch} Login={Login} actions={actions} Article={Article}/><Comment dispatch={dispatch} actions={actions} Article={Article} Login={Login}/></div>:<ActivityIndicator size="large" />}
 			</div>
 		)
 	}

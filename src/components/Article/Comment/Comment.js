@@ -1,3 +1,4 @@
+require('./Comment.less');
 import React from 'react';
 import {
 	createForm
@@ -11,14 +12,11 @@ import {
 	Button,
 	Icon
 } from 'antd-mobile';
-require('./Comment.less')
+import GetTime from '../../../utils/GetTime';
 class Comment extends React.Component {
 		constructor(arg) {
 			super(arg);
 			this.contains = this.contains.bind(this)
-		}
-		replyTime() {
-
 		}
 		contains(arr, obj) {
 			let i = arr.length;
@@ -63,7 +61,7 @@ class Comment extends React.Component {
 							      <Card.Body>
 							      	<div dangerouslySetInnerHTML={{__html:index.content}}></div>
 							      </Card.Body>
-							      <Card.Footer content={_this.replyTime()} extra={
+							      <Card.Footer content={GetTime.getTime(new Date(),index.create_at)} extra={
 							      	<div>
 							      	<Icon onClick={()=>dispatch(actions.request_upComment(Login.accesstoken,index.id,key,index.ups))} type={_this.contains(index.ups,Login.id)?require('../../../images/agree-fill.svg'):require('../../../images/agree.svg')}></Icon>
 							      	&nbsp;{Article.hasOwnProperty('commentUps')?Article.commentUps.reply.length+1:index.ups.length}&nbsp;

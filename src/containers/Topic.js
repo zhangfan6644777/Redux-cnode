@@ -3,7 +3,8 @@ import {
 	connect
 } from 'react-redux';
 import Header from '../components/Homepage/Header/index';
-import List from '../components/Homepage/List/index';
+//import List from '../components/Homepage/List/index';
+import List from '../components/Homepage/List/qwe';
 import {
 	Tabs,
 	WhiteSpace
@@ -67,6 +68,7 @@ class HomePage extends React.Component {
 
 		//console.log(actions)
 		if (!isFetching && topics.length === 0) {
+			alert(1)
 			dispatch(actions.request_topic(newProps.state.selectedTab))
 		}
 
@@ -89,7 +91,7 @@ class HomePage extends React.Component {
 		mYdispatch = dispatch;
 
 		return (
-			<div style={{height:document.documentElement.clientHeight-99}}>
+			<div style={{height:document.documentElement.clientHeight-99,overflowY:'hidden'}}>
 				<Header/>
       			<div>
 				    <Tabs defaultActiveKey="1" animated={false} onChange={this.callback}>
@@ -109,8 +111,6 @@ class HomePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-	//console.log(state)
-	//console.log("tian")
 	return {
 		state: state.Topic
 	}

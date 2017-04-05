@@ -73,6 +73,23 @@ let actions = {
 				})
 			})
 	},
+	request_collectArticle: (accessToken, articleId) => (dispatch, getState) => {
+		fetch(`https://cnodejs.org/topic/collect`, {
+				method: 'POST',
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded"
+				},
+				body: `accesstoken=${accessToken}&topic_Id=${articleId}`
+			})
+			.then(res => res.json())
+			.then(data => {
+				console.log(data)
+				dispatch({
+					type: 'COLLECT_ARTICLE',
+					success: data.success
+				})
+			})
+	},
 	//Access_Token
 	request_AccessToken: (access_token) => (dispatch, getState) => {
 		//7d97b9fb-4e23-40df-a90b-d6cc31b84fcd

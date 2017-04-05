@@ -20,7 +20,7 @@ class list extends React.Component {
 
   }
   onrefresh() {
-
+    alert(1)
   }
   render() {
     let {
@@ -41,7 +41,9 @@ class list extends React.Component {
     }
     return (
       <div>
-      <RefreshControl onRefresh={this.onrefresh}></RefreshControl>
+        <RefreshControl
+          onRefresh={this.onrefresh}
+        />
         <List className="my-list" >
           <FlipMove enterAnimation={enterAnimation} easing='ease-out' duration='400' staggerDelayBy='40' staggerDurationBy='4'>
               {state.map(function(index){
@@ -54,7 +56,7 @@ class list extends React.Component {
                 )
               })}
             </FlipMove>
-          </List>  
+        </List>  
       </div>
     )
 
