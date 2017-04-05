@@ -74,6 +74,8 @@ let actions = {
 			})
 	},
 	request_collectArticle: (accessToken, articleId) => (dispatch, getState) => {
+		console.log('接口现在有问题')
+		return
 		fetch(`https://cnodejs.org/topic/collect`, {
 				method: 'POST',
 				headers: {
@@ -87,6 +89,25 @@ let actions = {
 				dispatch({
 					type: 'COLLECT_ARTICLE',
 					success: data.success
+				})
+			})
+	},
+	request_commentArticle: (accessToken, topicId, content, replyId) => (dispatch, getState) => {
+		const reply = replyId ? `accesstoken=${accessToken}&content=${content}&replyId=${replyId}` : `accesstoken=${accessToken}&content=${content}`
+		fetch(`https://cnodejs.org/api/v1/topic/${topicId}/replies`, {
+				method: 'POST',
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded"
+				},
+				body: reply
+			})
+			.then(res => res.json())
+			.then(data => {
+				console.log(data)
+				dispatch({
+					type: 'COMMENT_ARTICLE',
+					success: data.success,
+					replyId: data.reply_id
 				})
 			})
 	},
