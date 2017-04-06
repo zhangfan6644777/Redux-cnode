@@ -18,15 +18,21 @@ const getTime = {
 				return Math.floor(days / 365) + '年前'
 			} else if (days > 30) {
 				return Math.floor(days / 30) + '月前'
+			} else if (days < 0) {
+				return '刚刚'
 			} else {
+				console.log(days)
+				console.log(date3)
 				return days + '天前'
 			}
 		} else if (hours != 0) {
 			return hours + '小时前'
 		} else if (minutes != 0) {
 			return minutes + '分钟前'
-		} else {
+		} else if (seconds != 0) {
 			return seconds + '秒前'
+		} else if (seconds == 0) {
+			return '刚刚'
 		}
 	}
 }

@@ -68,7 +68,6 @@ class HomePage extends React.Component {
 
 		//console.log(actions)
 		if (!isFetching && topics.length === 0) {
-			alert(1)
 			dispatch(actions.request_topic(newProps.state.selectedTab))
 		}
 
