@@ -12,14 +12,15 @@ class Message extends React.Component {
 		console.log(this.props)
 		let {
 			Login,
-			Message
+			Message,
+			gotoLogin
 		} = this.props
 		return (
 			<div>
 				<NavBar  onLeftClick={() => history.go(-1)}>
 					消息
     			</NavBar>
-				<MessageList state={Message}></MessageList>
+    			{Login.success?<MessageList state={Message}/>:<div style={{padding:'60px',textAlign:'center'}}>请先<span style={{color:'#108ee9'}} onClick={()=>{gotoLogin('myinfo')}}>登录</span>之后再进行操作</div>}
 			</div>
 		)
 	}

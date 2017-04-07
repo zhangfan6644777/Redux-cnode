@@ -22,7 +22,8 @@ class list extends React.Component {
   onrefresh() {}
   render() {
     let {
-      state
+      state,
+      gotoLogin
     } = this.props
     console.log(this.props)
     console.log(this.props)
@@ -40,12 +41,23 @@ class list extends React.Component {
       // }<FlipMove enterAnimation={enterAnimation} easing='ease-out' duration='4000' staggerDelayBy='40' staggerDurationBy='4'>
       //    </FlipMove>
       // console.log('qqqqqqqqqqqqqq')
+    console.log(gotoLogin)
+    // console.log(JSON.stringify({
+    //   method: gotoLogin
+    // }))
+    // console.log({
+    //   method: gotoLogin
+    // }.toString())
+    // eval({
+    //   method: gotoLogin
+    // }.toString())
     return (
       <div>
-        <List className="my-list" >
+      <div style={{height:'100px'}} onClick={()=>alert(1)}>1231231</div>
+        <List  className="my-list" >
               {state.map(function(index){
                 return(
-                  <Link key={index.id} to={`/arcitle/${index.id}`} style={{display:'block'}} >
+        <Link key={index.id} to={{pathname:`/arcitle/${index.id}`,state:{method:gotoLogin}}} style={{display:'block'}} >
                     <Item  extra={index.create_at.substring(0,10)} align="bottom" thumb={index.author.avatar_url} multipleLine>
                       {index.title}<Brief>{index.reply_count}/{index.visit_count} 分享</Brief>
                     </Item>

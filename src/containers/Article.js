@@ -12,6 +12,7 @@ import {
 	NavBar,
 	Icon
 } from 'antd-mobile';
+let gotoLogin;
 class Article extends React.Component {
 	componentDidMount() {
 		const {
@@ -26,13 +27,18 @@ class Article extends React.Component {
 			Login,
 			dispatch
 		} = this.props;
-		console.log(this.props)
+
+		console.log(this.props.location.state)
+		console.log(JSON.stringify(this.props.location.state))
+		if (this.props.location.state.method) {
+			gotoLogin = this.props.location.state;
+		}
 		return (
 			<div>
 				<NavBar  onLeftClick={() => history.go(-1)}>
 					详情
     			</NavBar>
-    			{Article.data.id?<div><Content dispatch={dispatch} Login={Login} actions={actions} Article={Article}/><Comment dispatch={dispatch} actions={actions} Article={Article} Login={Login}/></div>:<ActivityIndicator size="large" />}
+    			{Article.data.id?<div><Content dispatch={dispatch} Login={Login} actions={actions} Article={Article}/><Comment gotoLogin={gotoLogin} dispatch={dispatch} actions={actions} Article={Article} Login={Login}/></div>:<ActivityIndicator size="large" />}
 			</div>
 		)
 	}

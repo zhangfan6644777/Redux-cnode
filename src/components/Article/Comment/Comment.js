@@ -55,9 +55,13 @@ class Comment extends React.Component {
 			Article,
 			Login,
 			dispatch,
-			actions
+			actions,
+			gotoLogin
 		} = this.props;
-
+		console.log(gotoLogin)
+			//console.log(typeof(gotoLogin))
+			//eval(gotoLogin)
+			//console.log(JSON.parse(gotoLogin))
 		if (Article.data.reply_count) { //判断数据是否存在 只是一个判断条件
 			Article.data.replies.map(function(index, key) {
 				if (_this.contains(index.ups, Login.id)) {
@@ -85,6 +89,7 @@ class Comment extends React.Component {
 			})
 			return (
 				<div className='Article-comment'>
+				<div style={{padding:'60px',textAlign:'center'}}>请先<span style={{color:'#108ee9'}} onClick={()=>{gotoLogin.method('myinfo')}}>登录</span>之后再进行操作</div>
 						<h3>共{Article.data.reply_count}条评论</h3>
 						{Article.data.replies.map(function(index,key){
 							return(
@@ -141,7 +146,7 @@ class Comment extends React.Component {
         			</div>
 			)
 		} else {
-			return (<div></div>)
+			return (<div style={{padding:'60px',textAlign:'center'}}>请先<span style={{color:'#108ee9'}} onClick={()=>{gotoLogin('myinfo')}}>登录</span>之后再进行操作</div>)
 		}
 
 	}

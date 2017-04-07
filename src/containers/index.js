@@ -11,16 +11,22 @@ import Topic from './Topic';
 import PublishTopic from './PublishTopic';
 import Message from './Message';
 import Login from './Login';
-class Index extends React.Component {
 
+import HashMap from '../utils/HashMapUtils';
+class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'blueTab',
+      selectedTab: HashMap.containsKey('selectedTab') ? HashMap.get('selectedTab') : 'index',
       hidden: false,
     };
+    this.gotoLogin = this.gotoLogin.bind(this);
   }
-
+  gotoLogin(tab) {
+    this.setState({
+      selectedTab: tab
+    })
+  }
   renderContent(pageText) {
     let {
       state,
@@ -29,15 +35,15 @@ class Index extends React.Component {
 
     if (pageText == '首页') {
       return (
-        <Topic actions={actions} />
+        <Topic gotoLogin={(tab)=>this.gotoLogin(tab)} actions={actions} />
       );
     } else if (pageText == '发布') {
       return (
-        <PublishTopic actions={actions} />
+        <PublishTopic gotoLogin={(tab)=>this.gotoLogin(tab)} actions={actions} />
       )
     } else if (pageText == '消息') {
       return (
-        <Message actions={actions} />
+        <Message gotoLogin={(tab)=>this.gotoLogin(tab)} actions={actions} />
       )
     } else if (pageText == '我的') {
       return (
@@ -69,11 +75,12 @@ class Index extends React.Component {
             background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  0.42rem 0.42rem no-repeat' }}
           />
           }
-          selected={this.state.selectedTab === 'blueTab'}
+          selected={this.state.selectedTab === 'index'}
           badge={1}
           onPress={() => {
+            HashMap.put('selectedTab','index')
             this.setState({
-              selectedTab: 'blueTab',
+              selectedTab: 'index',
             });
           }}
           data-seed="logId"
@@ -86,10 +93,11 @@ class Index extends React.Component {
           title="发布"
           key="发布"
           badge={'new'}
-          selected={this.state.selectedTab === 'redTab'}
+          selected={this.state.selectedTab === 'publish'}
           onPress={() => {
+            HashMap.put('selectedTab','publish')
             this.setState({
-              selectedTab: 'redTab',
+              selectedTab: 'publish',
             });
           }}
           data-seed="logId1"
@@ -114,10 +122,11 @@ class Index extends React.Component {
           title="消息"
           key="消息"
           dot
-          selected={this.state.selectedTab === 'greenTab'}
+          selected={this.state.selectedTab === 'message'}
           onPress={() => {
+            HashMap.put('selectedTab','message');
             this.setState({
-              selectedTab: 'greenTab',
+              selectedTab: 'message',
             });
           }}
         >
@@ -129,10 +138,11 @@ class Index extends React.Component {
           selectedIcon={{ uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' }}
           title="我的"
           key="我的"
-          selected={this.state.selectedTab === 'yellowTab'}
+          selected={this.state.selectedTab === 'myinfo'}
           onPress={() => {
+            HashMap.put('selectedTab','myinfo');
             this.setState({
-              selectedTab: 'yellowTab',
+              selectedTab: 'myinfo',
             });
           }}
         >

@@ -19,7 +19,6 @@ class Message extends React.Component {
 		let {
 			state
 		} = this.props
-
 		return (
 			<Tabs defaultActiveKey="1" animated={false}>
 				    <TabPane tab="已读消息" key="1">
@@ -56,7 +55,6 @@ class Message extends React.Component {
 				           </List>
 				           
 				        </div>
-
 				    </TabPane>
 			    </Tabs>
 		)

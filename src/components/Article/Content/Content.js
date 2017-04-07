@@ -6,6 +6,9 @@ import {
 } from 'antd-mobile';
 const Item = List.Item;
 const Brief = Item.Brief;
+import {
+	Link
+} from 'react-router';
 
 import GetTime from '../../../utils/GetTime';
 
@@ -31,7 +34,7 @@ class Content extends React.Component {
 			<div>
 			    <Card full>
 			      <Card.Header
-			        title={'作者:'+Article.data.author.loginname+' 来自 '+from}
+			        title={<Link to={`/userinfo/${Article.data.author.loginname}`}>作者: {Article.data.author.loginname}</Link>}
 			        extra={<span>发布于{GetTime.getTime(new Date(),Article.data.create_at)}</span>}
 			      />
 			      <Card.Body>

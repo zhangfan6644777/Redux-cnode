@@ -38,7 +38,7 @@ class UserInfo extends React.Component {
 			      </Card.Body>
 			      <Card.Footer content={'创建于'+GetTime.getTime(new Date(),userinfo.create_at)}/>
 			    </Card>
-			    <Tabs defaultActiveKey="1" animated={false} onChange={callback}>
+			    <Tabs defaultActiveKey="1"  onChange={callback}>
 				    <TabPane tab="我发布的主题" key="1">
 				        <div  style={{ display: 'flex', backgroundColor: '#fff',height:'7.5rem'}}>
 				           <ul className='userTopic'>
