@@ -21,8 +21,7 @@ const getTime = {
 			} else if (days < 0) {
 				return '刚刚'
 			} else {
-				console.log(days)
-				console.log(date3)
+
 				return days + '天前'
 			}
 		} else if (hours != 0) {

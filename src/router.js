@@ -11,7 +11,7 @@ import Login from './containers/Login';
 import PublishTopic from './containers/PublishTopic';
 import Message from './containers/Message';
 import Article from './containers/Article';
-
+import OtherInfo from './containers/OtherInfo';
 class routes extends React.Component {
 	render() {
 		return (
@@ -22,6 +22,7 @@ class routes extends React.Component {
 					<Route path='/publish' component={PublishTopic}></Route>
 					<Route path='/message' component={Message}></Route>
 					<Route path='/arcitle/:id' component={Article}></Route>
+					<Route path='/userinfo/:loginname' component={OtherInfo}></Route>
 				</Route>	
 			</Router>
 

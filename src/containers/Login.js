@@ -25,7 +25,7 @@ class Login extends React.Component {
 			actions,
 			dispatch,
 			state
-		} = newProps
+		} = newProps;
 		if (window.localStorage.getItem('masterInfo')) {
 			return
 		} else {
@@ -75,7 +75,7 @@ class Login extends React.Component {
     ])} size='md' type={require('../images/logout.svg')} style={{ marginRight: '0.1rem',display:state.Login.success?'block':'none' }} />}>
 					个人中心
     			</NavBar>
-    			{state.Login.success?<UserInfo state={state.UserInfo}  />:<UserLogin login={this.login.bind(this)} state={state}/>}
+    			{state.Login.success?<UserInfo userinfo={state.UserInfo.userInfo} collect={state.UserInfo.collect}  />:<UserLogin login={this.login.bind(this)} state={state}/>}
 			</div>
 		)
 	}

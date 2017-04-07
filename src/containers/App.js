@@ -10,7 +10,6 @@ class App extends React.Component {
 		let {
 			dispatch
 		} = this.props;
-
 		if (window.localStorage.getItem('masterInfo')) {
 			//console.log(window.localStorage.getItem('masterInfo'))
 			const userInfo = JSON.parse(window.localStorage.getItem('masterInfo'));

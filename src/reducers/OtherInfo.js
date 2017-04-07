@@ -1,26 +1,25 @@
-const UserInfoReducers = (state = {
+const OtherInfoReducers = (state = {
 	isFetching: false,
 }, action) => {
 	let newState;
 	switch (action.type) {
-		case 'REQUEST_USERINFO':
-			console.log('正在请求')
-			state.userInfo = {};
+		case 'REQUEST_OTHERINFO':
+			state.otherInfo = {}
 			state.isFetching = true;
 			newState = Object.assign({}, state)
 			return newState
-		case 'RECEIVE_USERINFO':
-			console.log('请求成功')
+		case 'RECEIVE_OTHERINFO':
+			console.log('成功')
 			state.isFetching = false;
-			state.userInfo = action.userinfo
+			state.otherInfo = action.otherinfo
 			newState = Object.assign({}, state)
 			return newState
-		case 'RECEIVE_COLLECTION':
-			state.collect = action.collectlist;
+		case 'RECEIVE_OTHERCOLLECTION':
+			state.collect = action.collect;
 			newState = Object.assign({}, state)
 			return newState
 		default:
 			return state
 	}
 }
-export default UserInfoReducers;
+export default OtherInfoReducers;

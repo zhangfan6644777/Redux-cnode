@@ -149,6 +149,7 @@ let actions = {
 		type: 'LOG_OUT'
 	}),
 	//UserInfo 个人信息和收藏的主题
+
 	request_UserInfo: (loginname) => (dispatch, getState) => {
 		if (getState().isFetching) return
 		dispatch(actions.requestUserInfo(loginname));
@@ -180,6 +181,37 @@ let actions = {
 		loginname,
 		collectlist
 	}),
+	//OtherInfo
+	request_OtherInfo: (loginname) => (dispatch, getState) => {
+		if (getState().isFetching) return
+		dispatch(actions.requestOtherInfo(loginname));
+		dispatch(actions.request_OtherCollection(loginname));
+		fetch(`https://cnodejs.org/api/v1/user/${loginname}`)
+			.then(res => res.json())
+			.then(data => {
+				dispatch(actions.receiveOtherInfo(loginname, data.data))
+			})
+	},
+	requestOtherInfo: (loginname) => ({
+		type: 'REQUEST_OTHERINFO',
+		loginname
+	}),
+	receiveOtherInfo: (loginname, otherinfo) => ({
+		type: 'RECEIVE_OTHERINFO',
+		loginname,
+		otherinfo
+	}),
+	request_OtherCollection: (loginname) => (dispatch, getState) => {
+		fetch(`https://cnodejs.org/api/v1/topic_collect/${loginname}`)
+			.then(res => res.json())
+			.then(data => {
+				dispatch({
+					type: 'RECEIVE_OTHERCOLLECTION',
+					loginname: loginname,
+					collect: data.data
+				})
+			})
+	},
 	//Message
 	request_Message: (access_token) => (dispatch, getState) => {
 		fetch(`https://cnodejs.org/api/v1/messages?accesstoken=${access_token}`)

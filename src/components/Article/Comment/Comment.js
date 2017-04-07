@@ -12,6 +12,9 @@ import {
 	Button,
 	Icon
 } from 'antd-mobile';
+import {
+	Link
+} from 'react-router';
 import GetTime from '../../../utils/GetTime';
 class Comment extends React.Component {
 	constructor(arg) {
@@ -90,9 +93,9 @@ class Comment extends React.Component {
 									    <WhiteSpace size="lg" />
 									    <Card full>
 									      <Card.Header
-									        title={index.author.loginname}
+									        title={<Link to={`/userinfo/${index.author.loginname}`}>{index.author.loginname}</Link>}
 											thumb={index.author.avatar_url}
-									        extra={<span>{key+1}楼</span>}
+									        extra={<p>{key+1}楼</p>}
 									      />
 									      <Card.Body>
 									      	<div dangerouslySetInnerHTML={{__html:index.content}}></div>
