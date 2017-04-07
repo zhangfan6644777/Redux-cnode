@@ -3,11 +3,12 @@ import {
 	connect
 } from 'react-redux';
 import Header from '../components/Homepage/Header/index';
-//import List from '../components/Homepage/List/index';
-import List from '../components/Homepage/List/qwe';
+import List from '../components/Homepage/List/index';
+//import List from '../components/Homepage/List/qwe';
 import {
 	Tabs,
-	WhiteSpace
+	WhiteSpace,
+	ActivityIndicator
 } from 'antd-mobile';
 const TabPane = Tabs.TabPane;
 let myAction, mYdispatch; //保存action和dispatch
@@ -50,7 +51,9 @@ class HomePage extends React.Component {
 			selectedTab
 		} = state
 		//console.log(selectedTab)
-		dispatch(actions.request_topic(selectedTab))
+		dispatch(actions.selectTab(selectedTab))
+			//dispatch(actions.request_topic(selectedTab))
+			//console.log(1)
 	}
 	componentWillReceiveProps(newProps) {
 		let {
@@ -58,7 +61,7 @@ class HomePage extends React.Component {
 			dispatch
 		} = newProps;
 		//console.log('我是newProps')
-		//console.log(newProps)
+		console.log(newProps)
 		let {
 			topics,
 			isFetching
@@ -75,7 +78,7 @@ class HomePage extends React.Component {
 	callback(key) {
 		mYdispatch(myAction.selectTab(tab[key - 1].tab))
 			//改变数据中selectTab
-		mYdispatch(myAction.recordScrollT(tab[key - 1].tab, 0))
+			//mYdispatch(myAction.recordScrollT(tab[key - 1].tab, 0))
 			//改变数据中的tabData 让他为空导致topics.length==0
 			//然后在去调用componentWillReceiveProps
 			//中的dispatch  此时正好fetching==false 
@@ -88,21 +91,35 @@ class HomePage extends React.Component {
 		} = this.props;
 		myAction = actions;
 		mYdispatch = dispatch;
-
+		console.log(this.props);
+		let defaultActiveKey;
+		if (state.selectedTab == 'all') { //解决go(-1)的时候 渲染不出的问题
+			//本来我是job进入的 article 然后返回的是第一个all 的tab 导致
+			//index.tab(all)==state.selectedTab(job)不相等
+			defaultActiveKey = '1';
+		} else if (state.selectedTab == 'good') {
+			defaultActiveKey = '2';
+		} else if (state.selectedTab == 'share') {
+			defaultActiveKey = '3';
+		} else if (state.selectedTab == 'ask') {
+			defaultActiveKey = '4';
+		} else if (state.selectedTab == 'job') {
+			defaultActiveKey = '5';
+		}
 		return (
-			<div style={{height:document.documentElement.clientHeight-99,overflowY:'hidden'}}>
+			<div style={{height:document.documentElement.clientHeight-99}}>
 				<Header/>
       			<div>
-				    <Tabs defaultActiveKey="1" animated={false} onChange={this.callback}>
+				    <Tabs defaultActiveKey={defaultActiveKey} animated={false} onChange={this.callback}>
 						{tab.map(function(index){
 							return (
 								<TabPane tab={index.name} key={index.key}>
-				       				{index.tab==state.selectedTab&&state.tabData.topics?<List state={state.tabData.topics} />:<div></div>}		
+									{(index.tab == state.selectedTab && state.tabData.topics.length != 0) ? <List state={state.tabData.topics} /> : <ActivityIndicator size="large" />}
 				      			</TabPane>
 							)
 						})}
 				    </Tabs>
-    				<WhiteSpace />
+				    
   				</div>
 			</div>
 		);

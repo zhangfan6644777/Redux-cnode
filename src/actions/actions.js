@@ -6,7 +6,8 @@ let actions = {
 	}),
 	request_topic: (tab, page = 1, limit = 15) => (dispatch, getState) => {
 		let url = `https://cnodejs.org/api/v1/topics?tab=${tab}&page=${page}&limit=${limit}`;
-		if (getState().isFetching) return
+		//if (getState().isFetching) return
+		//dispatch(actions.selectTab(tab))
 		dispatch(actions.requestTopic(tab))
 		fetch(url).then(function(res) {
 			return res.json()
@@ -53,7 +54,7 @@ let actions = {
 		data,
 		id
 	}),
-	request_upComment: (accessToken, replyId, key, replydata) => (dispatch, getState) => {
+	request_upComment: (accessToken, replyId, key, replydata, id) => (dispatch, getState) => {
 		fetch(`https://cnodejs.org/api/v1/reply/${replyId}/ups`, {
 				method: 'POST',
 				headers: {
@@ -66,7 +67,7 @@ let actions = {
 				//dispatch(actions())
 				dispatch({
 					type: 'UP_COMMENT',
-					data: data,
+					action: data.action,
 					key: key,
 					reply: replydata,
 					replyId: replyId

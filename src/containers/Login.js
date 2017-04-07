@@ -11,7 +11,6 @@ import {
 	Modal
 } from 'antd-mobile';
 const alert = Modal.alert;
-let qqqqq = true;
 import UserInfo from '../components/Login/UserInfo/UserInfo';
 import UserLogin from '../components/Login/UserLogin/UserLogin';
 class Login extends React.Component {

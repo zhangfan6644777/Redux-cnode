@@ -17,7 +17,7 @@ class Comment extends React.Component {
 	constructor(arg) {
 		super(arg);
 		this.contains = this.contains.bind(this)
-
+		this.upComment = [];
 		this.state = {
 			replyOther: false,
 			replyId: ''
@@ -56,8 +56,32 @@ class Comment extends React.Component {
 		} = this.props;
 
 		if (Article.data.reply_count) { //判断数据是否存在 只是一个判断条件
+			Article.data.replies.map(function(index, key) {
+				if (_this.contains(index.ups, Login.id)) {
+					index.is_uped = true;
+				} else {
+					index.is_uped = false
+				}
+
+				// if(_this.upComment[key]){
+				// 	let upNum=index.ups.length;
+				// }else if(_this.upComment&&Article.upComment[key]=='up'){
+				// 	let upNum=(index.ups.length+1);
+				// }else if(_this.upComment&&Article.upComment[key]=='down'){
+
+				// }
+
+
+				if (_this.upComment.length == Article.data.replies.length) {
+					return
+				}
+				_this.upComment.push(index.is_uped);
+
+
+
+			})
 			return (
-				<div>
+				<div className='Article-comment'>
 						<h3>共{Article.data.reply_count}条评论</h3>
 						{Article.data.replies.map(function(index,key){
 							return(
@@ -75,8 +99,8 @@ class Comment extends React.Component {
 									      </Card.Body>
 									      <Card.Footer content={GetTime.getTime(new Date(),index.create_at)} extra={
 									      	<div>
-									      	<Icon onClick={()=>dispatch(actions.request_upComment(Login.accesstoken,index.id,key,index.ups))} type={_this.contains(index.ups,Login.id)?require('../../../images/agree-fill.svg'):require('../../../images/agree.svg')}></Icon>
-									      	&nbsp;{Article.hasOwnProperty('commentUps')?Article.commentUps.reply.length+1:index.ups.length}&nbsp;
+									      	<Icon onClick={()=>{dispatch(actions.request_upComment(Login.accesstoken,index.id,key,index.ups,Article.data.id));_this.upComment[key]=!_this.upComment[key]}} type={_this.upComment[key]?require('../../../images/agree-fill.svg'):require('../../../images/agree.svg')}></Icon>
+									      	&nbsp;{(_this.upComment[key])?index.ups.length:index.ups.length}&nbsp;
 									      	<Icon onClick={()=>_this.setState({replyOther:!_this.state.replyOther,replyId:index.id})} type={require('../../../images/forward.svg')}></Icon>
 									      	</div>} />
 									    </Card>

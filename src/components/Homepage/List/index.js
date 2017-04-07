@@ -19,33 +19,30 @@ class list extends React.Component {
   componentDidMount() {
 
   }
-  onrefresh() {
-    alert(1)
-  }
+  onrefresh() {}
   render() {
     let {
       state
     } = this.props
-      //console.log(this.props)
-      //let disableAllAnimations = topics.length === 20 ? false : true
-      // disableAllAnimations从启用到禁用时enterAnimation设定的动画会不起作用，原因不明。
-    let enterAnimation = {
-      from: {
-        transform: 'translateY(-158px)',
-        opacity: 0
-      },
-      to: {
-        transform: 'translateY(0)',
-        opacity: 1
-      }
-    }
+    console.log(this.props)
+    console.log(this.props)
+      //   //let disableAllAnimations = topics.length === 20 ? false : true
+      //   // disableAllAnimations从启用到禁用时enterAnimation设定的动画会不起作用，原因不明。
+      // let enterAnimation = {
+      //   from: {
+      //     transform: 'translateY(-800px)',
+      //     opacity: 0
+      //   },
+      //   to: {
+      //     transform: 'translateY(0)',
+      //     opacity: 1
+      //   }
+      // }<FlipMove enterAnimation={enterAnimation} easing='ease-out' duration='4000' staggerDelayBy='40' staggerDurationBy='4'>
+      //    </FlipMove>
+      // console.log('qqqqqqqqqqqqqq')
     return (
       <div>
-        <RefreshControl
-          onRefresh={this.onrefresh}
-        />
         <List className="my-list" >
-          <FlipMove enterAnimation={enterAnimation} easing='ease-out' duration='400' staggerDelayBy='40' staggerDurationBy='4'>
               {state.map(function(index){
                 return(
                   <Link key={index.id} to={`/arcitle/${index.id}`} style={{display:'block'}} >
@@ -55,7 +52,6 @@ class list extends React.Component {
                   </Link>
                 )
               })}
-            </FlipMove>
         </List>  
       </div>
     )

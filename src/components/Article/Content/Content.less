@@ -8,7 +8,10 @@ h2{
 
 .markdown-body{
 	padding: 40px;
-	a{
+	a{	
+		display: block;
+		word-wrap:break-word;
+		width: 100%;
 		color:#4078c0;
 		&:hover{
 			color:#4078c0;
@@ -16,16 +19,18 @@ h2{
 	}
 
 	p{
-		text-indent: 0.6rem;
 		width: 100%;
 	}
 	img{
-		display: block;
 		margin: auto;
 		width:100%;
 	}
 
 	li{
 		list-style:none;
+	}
+	code{
+	white-space: normal;  
+	word-break: break-all;  
 	}
 }
