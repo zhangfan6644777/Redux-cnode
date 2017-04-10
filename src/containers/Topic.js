@@ -88,7 +88,6 @@ class HomePage extends React.Component {
 			state,
 			actions,
 			dispatch,
-			gotoLogin
 		} = this.props;
 		myAction = actions;
 		mYdispatch = dispatch;
@@ -115,7 +114,7 @@ class HomePage extends React.Component {
 						{tab.map(function(index){
 							return (
 								<TabPane tab={index.name} key={index.key}>
-									{(index.tab == state.selectedTab && state.tabData.topics.length != 0) ? <List gotoLogin={gotoLogin} state={state.tabData.topics} /> : <ActivityIndicator size="large" />}
+									{(index.tab == state.selectedTab && state.tabData.topics.length != 0) ? <List state={state.tabData.topics} /> : <ActivityIndicator size="large" />}
 				      			</TabPane>
 							)
 						})}

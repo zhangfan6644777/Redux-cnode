@@ -55,13 +55,10 @@ class Comment extends React.Component {
 			Article,
 			Login,
 			dispatch,
-			actions,
-			gotoLogin
+			actions
 		} = this.props;
-		console.log(gotoLogin)
-			//console.log(typeof(gotoLogin))
-			//eval(gotoLogin)
-			//console.log(JSON.parse(gotoLogin))
+		console.log(this)
+		console.log('qqqqqqqqqqqqqqqqqq')
 		if (Article.data.reply_count) { //判断数据是否存在 只是一个判断条件
 			Article.data.replies.map(function(index, key) {
 				if (_this.contains(index.ups, Login.id)) {
@@ -89,7 +86,7 @@ class Comment extends React.Component {
 			})
 			return (
 				<div className='Article-comment'>
-				<div style={{padding:'60px',textAlign:'center'}}>请先<span style={{color:'#108ee9'}} onClick={()=>{gotoLogin.method('myinfo')}}>登录</span>之后再进行操作</div>
+				
 						<h3>共{Article.data.reply_count}条评论</h3>
 						{Article.data.replies.map(function(index,key){
 							return(
@@ -131,6 +128,7 @@ class Comment extends React.Component {
 								)
 							})
 						}
+						{Login.success?
 						<List renderHeader={() => '添加回复'}>
 				            <TextareaItem
 				            	{...getFieldProps('count', {})}
@@ -138,11 +136,13 @@ class Comment extends React.Component {
 				            	count={200}
 				            	clear
 				            />
-		        		</List>
-        				< Button onClick={()=>{
-        					const content=getFieldProps('count').value;
-        					dispatch(actions.request_commentArticle(Login.accesstoken,Article.data.id,content));
-        					}} className = "btn" type = "primary" > 回复 < /Button> 
+ 							< Button onClick = {() => {
+								const content = getFieldProps('count').value;
+								dispatch(actions.request_commentArticle(Login.accesstoken, Article.data.id, content));
+								}}
+							className = "btn" type = "primary" > 回复 < /Button>
+		        		</List>:<div style={{padding:'60px',textAlign:'center'}}>请先<span style={{color:'#108ee9'}} >登录</span>之后再进行操作</div>
+        				}
         			</div>
 			)
 		} else {
@@ -152,4 +152,5 @@ class Comment extends React.Component {
 	}
 }
 const Commenter = createForm()(Comment);
+
 export default Commenter;

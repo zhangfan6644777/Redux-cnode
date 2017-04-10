@@ -19,45 +19,35 @@ class list extends React.Component {
   componentDidMount() {
 
   }
-  onrefresh() {}
+  onrefresh() {
+    alert(1)
+  }
   render() {
     let {
-      state,
-      gotoLogin
+      state
     } = this.props
-    console.log(this.props)
-    console.log(this.props)
-      //   //let disableAllAnimations = topics.length === 20 ? false : true
-      //   // disableAllAnimations从启用到禁用时enterAnimation设定的动画会不起作用，原因不明。
-      // let enterAnimation = {
-      //   from: {
-      //     transform: 'translateY(-800px)',
-      //     opacity: 0
-      //   },
-      //   to: {
-      //     transform: 'translateY(0)',
-      //     opacity: 1
-      //   }
-      // }<FlipMove enterAnimation={enterAnimation} easing='ease-out' duration='4000' staggerDelayBy='40' staggerDurationBy='4'>
-      //    </FlipMove>
-      // console.log('qqqqqqqqqqqqqq')
-    console.log(gotoLogin)
-    // console.log(JSON.stringify({
-    //   method: gotoLogin
-    // }))
-    // console.log({
-    //   method: gotoLogin
-    // }.toString())
-    // eval({
-    //   method: gotoLogin
-    // }.toString())
+    let _this = this;
+    //   //let disableAllAnimations = topics.length === 20 ? false : true
+    //   // disableAllAnimations从启用到禁用时enterAnimation设定的动画会不起作用，原因不明。
+    // let enterAnimation = {
+    //   from: {
+    //     transform: 'translateY(-800px)',
+    //     opacity: 0
+    //   },
+    //   to: {
+    //     transform: 'translateY(0)',
+    //     opacity: 1
+    //   }
+    // }<FlipMove enterAnimation={enterAnimation} easing='ease-out' duration='4000' staggerDelayBy='40' staggerDurationBy='4'>
+    //    </FlipMove>
+    // console.log('qqqqqqqqqqqqqq')
     return (
       <div>
       <div style={{height:'100px'}} onClick={()=>alert(1)}>1231231</div>
         <List  className="my-list" >
               {state.map(function(index){
                 return(
-        <Link key={index.id} to={{pathname:`/arcitle/${index.id}`,state:{method:gotoLogin}}} style={{display:'block'}} >
+                  <Link key={index.id} to={`/arcitle/${index.id}`} style={{display:'block'}} >
                     <Item  extra={index.create_at.substring(0,10)} align="bottom" thumb={index.author.avatar_url} multipleLine>
                       {index.title}<Brief>{index.reply_count}/{index.visit_count} 分享</Brief>
                     </Item>
@@ -67,11 +57,6 @@ class list extends React.Component {
         </List>  
       </div>
     )
-
-
   }
 }
-
-
-
 export default list;

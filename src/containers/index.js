@@ -22,6 +22,7 @@ class Index extends React.Component {
     };
     this.gotoLogin = this.gotoLogin.bind(this);
   }
+
   gotoLogin(tab) {
     this.setState({
       selectedTab: tab
@@ -35,7 +36,7 @@ class Index extends React.Component {
 
     if (pageText == '首页') {
       return (
-        <Topic gotoLogin={(tab)=>this.gotoLogin(tab)} actions={actions} />
+        <Topic  actions={actions} />
       );
     } else if (pageText == '发布') {
       return (
@@ -152,5 +153,4 @@ class Index extends React.Component {
     );
   }
 }
-
 export default Index;
