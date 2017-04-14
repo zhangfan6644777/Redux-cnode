@@ -14,6 +14,11 @@ import {
 } from 'antd-mobile';
 let gotoLogin;
 class Article extends React.Component {
+	constructor(...arg) {
+		super(...arg);
+		this.like = this.like.bind(this);
+		this.comment = this.comment.bind(this);
+	}
 	componentDidMount() {
 		const {
 			dispatch,
@@ -21,7 +26,14 @@ class Article extends React.Component {
 		} = this.props;
 		dispatch(actions.request_article(params.id))
 	}
+	like(accesstoken, commentid, key, indexup, topicid) {
+		dispatch(actions.request_upComment(accesstoken, commentid, key, indexup, topicid))
+	}
+	comment(accesstoken, topicid, content, commentid) {
+		dispatch(actions.request_commentArticle(accesstoken, topicid, content, commentid));
+	}
 	render() {
+		console.log(this)
 		let {
 			Article,
 			Login,
@@ -33,7 +45,7 @@ class Article extends React.Component {
 				<NavBar  onLeftClick={() => history.go(-1)}>
 					详情
     			</NavBar>
-    			{Article.data.id?<div><Content dispatch={dispatch} Login={Login} actions={actions} Article={Article}/><Comment  dispatch={dispatch} actions={actions} Article={Article} Login={Login}/></div>:<ActivityIndicator size="large" />}
+    			{Article.data.id?<div><Content dispatch={dispatch} Login={Login} actions={actions} Article={Article}/><Comment like={this.like} comment={this.comment}  dispatch={dispatch} actions={actions} Article={Article} Login={Login}/></div>:<ActivityIndicator size="large" />}
 			</div>
 		)
 	}

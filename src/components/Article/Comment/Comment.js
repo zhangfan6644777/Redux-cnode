@@ -80,13 +80,9 @@ class Comment extends React.Component {
 					return
 				}
 				_this.upComment.push(index.is_uped);
-
-
-
 			})
 			return (
 				<div className='Article-comment'>
-				
 						<h3>共{Article.data.reply_count}条评论</h3>
 						{Article.data.replies.map(function(index,key){
 							return(

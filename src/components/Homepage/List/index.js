@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {
   List,
   RefreshControl
@@ -42,9 +43,8 @@ class list extends React.Component {
     //    </FlipMove>
     // console.log('qqqqqqqqqqqqqq')
     return (
-      <div>
-      <div style={{height:'100px'}} onClick={()=>alert(1)}>1231231</div>
-        <List  className="my-list" >
+      <div ref='mylistdiv' onScroll={()=>this.props.scroll(ReactDOM.findDOMNode(this.refs.mylistdiv),ReactDOM.findDOMNode(this.refs.mylist))} style={{height:document.documentElement.clientHeight-276,overflow:'auto'}}>
+        <List ref='mylist'  className="my-list" >
               {state.map(function(index){
                 return(
                   <Link key={index.id} to={`/arcitle/${index.id}`} style={{display:'block'}} >

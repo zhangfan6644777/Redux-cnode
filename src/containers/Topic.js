@@ -83,6 +83,11 @@ class HomePage extends React.Component {
 			//然后在去调用componentWillReceiveProps
 			//中的dispatch  此时正好fetching==false 
 	}
+	scroll(divdom, listdom) {
+		console.log(this)
+		console.log(divdom);
+		console.log(listdom);
+	}
 	render() {
 		let {
 			state,
@@ -91,7 +96,8 @@ class HomePage extends React.Component {
 		} = this.props;
 		myAction = actions;
 		mYdispatch = dispatch;
-		console.log(this.props);
+		console.log(this);
+		let _this = this;
 		let defaultActiveKey;
 		if (state.selectedTab == 'all') { //解决go(-1)的时候 渲染不出的问题
 			//本来我是job进入的 article 然后返回的是第一个all 的tab 导致
@@ -114,7 +120,7 @@ class HomePage extends React.Component {
 						{tab.map(function(index){
 							return (
 								<TabPane tab={index.name} key={index.key}>
-									{(index.tab == state.selectedTab && state.tabData.topics.length != 0) ? <List state={state.tabData.topics} /> : <ActivityIndicator size="large" />}
+									{(index.tab == state.selectedTab && state.tabData.topics.length != 0) ? <List scroll={_this.scroll} state={state.tabData.topics} /> : <ActivityIndicator size="large" />}
 				      			</TabPane>
 							)
 						})}
