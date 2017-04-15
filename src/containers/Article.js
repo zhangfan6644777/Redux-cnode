@@ -27,9 +27,15 @@ class Article extends React.Component {
 		dispatch(actions.request_article(params.id))
 	}
 	like(accesstoken, commentid, key, indexup, topicid) {
+		const {
+			dispatch
+		} = this.props;
 		dispatch(actions.request_upComment(accesstoken, commentid, key, indexup, topicid))
 	}
 	comment(accesstoken, topicid, content, commentid) {
+		const {
+			dispatch
+		} = this.props;
 		dispatch(actions.request_commentArticle(accesstoken, topicid, content, commentid));
 	}
 	render() {

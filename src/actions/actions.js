@@ -4,7 +4,7 @@ let actions = {
 		type: 'SELECT_TAB',
 		tab
 	}),
-	request_topic: (tab, page = 1, limit = 40) => (dispatch, getState) => {
+	request_topic: (tab, page = 1, limit = 10) => (dispatch, getState) => {
 		let url = `https://cnodejs.org/api/v1/topics?tab=${tab}&page=${page}&limit=${limit}`;
 		//if (getState().isFetching) return
 		//dispatch(actions.selectTab(tab))
@@ -78,6 +78,8 @@ let actions = {
 	request_collectArticle: (accessToken, articleId) => (dispatch, getState) => {
 		console.log('接口现在有问题')
 		return
+		const postConent = replyId ? `accesstoken=${accessToken}&content=${content}&replyId=${replyId}`:`accesstoken=${accessToken}&content=${content}`
+		https://cnodejs.org/api/v1/topic/${topicId}/replies
 		fetch(`https://cnodejs.org/topic/collect`, {
 				method: 'POST',
 				headers: {

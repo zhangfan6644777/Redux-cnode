@@ -11,7 +11,7 @@ import {
 const Item = List.Item;
 const Brief = Item.Brief;
 
-
+import Loadmore from '../Loadmore/loadmore';
 require('./index.less');
 class list extends React.Component {
   componentWillUnmount() {
@@ -54,6 +54,7 @@ class list extends React.Component {
                   </Link>
                 )
               })}
+              <Loadmore/>
         </List>  
       </div>
     )

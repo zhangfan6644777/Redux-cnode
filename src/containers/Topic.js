@@ -5,6 +5,8 @@ import {
 import Header from '../components/Homepage/Header/index';
 import List from '../components/Homepage/List/index';
 //import List from '../components/Homepage/List/qwe';
+
+import Loadmore from '../components/Homepage/Loadmore/Loadmore';
 import {
 	Tabs,
 	WhiteSpace,
@@ -36,6 +38,10 @@ let tab = [{
 	key: 5
 }]
 class HomePage extends React.Component {
+	constructor(...arg){
+		super(...arg);
+		this.loadmore=this.loadmore.bind(this);
+	}
 	componentWillMount() {
 
 	}
@@ -53,7 +59,6 @@ class HomePage extends React.Component {
 		//console.log(selectedTab)
 		dispatch(actions.selectTab(selectedTab))
 			//dispatch(actions.request_topic(selectedTab))
-			//console.log(1)
 	}
 	componentWillReceiveProps(newProps) {
 		let {
@@ -84,9 +89,28 @@ class HomePage extends React.Component {
 			//中的dispatch  此时正好fetching==false 
 	}
 	scroll(divdom, listdom) {
-		console.log(this)
-		console.log(divdom);
-		console.log(listdom);
+		//console.log(this)
+		console.log(divdom.scrollTop);
+		console.log(divdom.offsetHeight);
+		console.log(listdom.offsetHeight);
+		if(divdom.scrollTop+divdom.offsetHeight>=listdom.offsetHeight){
+			this.loadmore();
+		}
+		//console.log(listdom.offsetTop);
+		//this.loadmore()
+	}
+	loadmore(){
+		let {dispatch,state,actions}=this.props;
+		//alert(state.tabData.limit)
+		let num=state.tabData.limit;
+		num=num+10;
+		if(!state.tabData.isFecthing){
+			dispatch(actions.request_topic(state.selectedTab,1,num));
+			//this.loadCtrl=false;
+		}
+		//alert(1)
+		//console.log(this)
+		
 	}
 	render() {
 		let {
@@ -120,12 +144,11 @@ class HomePage extends React.Component {
 						{tab.map(function(index){
 							return (
 								<TabPane tab={index.name} key={index.key}>
-									{(index.tab == state.selectedTab && state.tabData.topics.length != 0) ? <List scroll={_this.scroll} state={state.tabData.topics} /> : <ActivityIndicator size="large" />}
+									{(index.tab == state.selectedTab && state.tabData.topics.length != 0) ? <List scroll={_this.scroll.bind(_this)} state={state.tabData.topics} /> : <ActivityIndicator size="large" />}
 				      			</TabPane>
 							)
 						})}
 				    </Tabs>
-				    
   				</div>
 			</div>
 		);

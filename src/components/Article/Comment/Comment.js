@@ -10,7 +10,8 @@ import {
 	List,
 	TextareaItem,
 	Button,
-	Icon
+	Icon,
+	Toast,
 } from 'antd-mobile';
 import {
 	Link
@@ -25,6 +26,7 @@ class Comment extends React.Component {
 			replyOther: false,
 			replyId: ''
 		}
+
 	}
 	contains(arr, obj) {
 		let i = arr.length;
@@ -43,6 +45,7 @@ class Comment extends React.Component {
 			Article
 		} = newProps;
 		if (Article.hasComment) {
+			//回复消息的逻辑
 			dispatch(actions.request_article(Article.articleId))
 		}
 	}
@@ -55,7 +58,9 @@ class Comment extends React.Component {
 			Article,
 			Login,
 			dispatch,
-			actions
+			actions,
+			like,
+			comment
 		} = this.props;
 		console.log(this)
 		console.log('qqqqqqqqqqqqqqqqqq')
@@ -66,16 +71,6 @@ class Comment extends React.Component {
 				} else {
 					index.is_uped = false
 				}
-
-				// if(_this.upComment[key]){
-				// 	let upNum=index.ups.length;
-				// }else if(_this.upComment&&Article.upComment[key]=='up'){
-				// 	let upNum=(index.ups.length+1);
-				// }else if(_this.upComment&&Article.upComment[key]=='down'){
-
-				// }
-
-
 				if (_this.upComment.length == Article.data.replies.length) {
 					return
 				}
@@ -100,8 +95,22 @@ class Comment extends React.Component {
 									      </Card.Body>
 									      <Card.Footer content={GetTime.getTime(new Date(),index.create_at)} extra={
 									      	<div>
-									      	<Icon onClick={()=>{dispatch(actions.request_upComment(Login.accesstoken,index.id,key,index.ups,Article.data.id));_this.upComment[key]=!_this.upComment[key]}} type={_this.upComment[key]?require('../../../images/agree-fill.svg'):require('../../../images/agree.svg')}></Icon>
-									      	&nbsp;{(_this.upComment[key])?index.ups.length:index.ups.length}&nbsp;
+									      	<Icon onClick={()=>{
+									      		if(Login.loginname==index.author.loginname){
+									      			Toast.fail('不能给自己点赞!!!', 1);
+									      			return
+									      		}
+									      		like(Login.accesstoken,index.id,key,index.ups,Article.data.id);
+									      		if(_this.upComment[key]){
+									      			index.ups.length--
+									      		}else{
+									      			index.ups.length++
+									      		}
+									      		
+									      		_this.upComment[key]=!_this.upComment[key];
+				
+									      		}} type={_this.upComment[key]?require('../../../images/agree-fill.svg'):require('../../../images/agree.svg')}></Icon>
+									      	&nbsp;{index.ups.length}&nbsp;
 									      	<Icon onClick={()=>_this.setState({replyOther:!_this.state.replyOther,replyId:index.id})} type={require('../../../images/forward.svg')}></Icon>
 									      	</div>} />
 									    </Card>
@@ -116,7 +125,7 @@ class Comment extends React.Component {
 					        				</List>
 			        						< Button onClick={()=>{
 				        					const content=getFieldProps('count').value;
-				        					dispatch(actions.request_commentArticle(Login.accesstoken,Article.data.id,content,index.id));
+				        					comment(Login.accesstoken,Article.data.id,content,index.id)
 				        					}} className = "btn" type = "primary" > 回复 < /Button> 
 										</div>
 									</div>
@@ -134,11 +143,11 @@ class Comment extends React.Component {
 				            />
  							< Button onClick = {() => {
 								const content = getFieldProps('count').value;
-								dispatch(actions.request_commentArticle(Login.accesstoken, Article.data.id, content));
+								comment(Login.accesstoken, Article.data.id, content)
 								}}
 							className = "btn" type = "primary" > 回复 < /Button>
 		        		</List>:<div style={{padding:'60px',textAlign:'center'}}>请先<span style={{color:'#108ee9'}} >登录</span>之后再进行操作</div>
-        				}
+        			}
         			</div>
 			)
 		} else {
