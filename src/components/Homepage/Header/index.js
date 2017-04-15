@@ -39,19 +39,16 @@ class header extends React.Component {
 			onOpenChange: this.onOpenChange.bind(this),
 		};
 		return (<div>
-		<NavBar iconName="ellipsis" onLeftClick={this.onOpenChange.bind(this)} rightContent={[
-        <Icon  key="0" type="search" style={{ marginRight: '0.32rem' }} />,
-      ]} >基本</NavBar>
-      <Drawer
-        className="my-drawer"
-        style={{height:document.documentElement.clientHeight-189}}
-        sidebar={sidebar}
-        dragHandleStyle={{ display: 'none' }}
-        contentStyle={{ color: '#A6A6A6', textAlign: 'center', paddingTop: 42 }}
-        {...drawerProps}
-      >
-      
-      </Drawer>
+		<NavBar iconName="ellipsis" onLeftClick={this.onOpenChange.bind(this)}>基本</NavBar>
+	      <Drawer
+	        className="my-drawer"
+	        style={{height:document.documentElement.clientHeight-189}}
+	        sidebar={sidebar}
+	        dragHandleStyle={{ display: 'none' }}
+	        contentStyle={{ color: '#A6A6A6', textAlign: 'center', paddingTop: 42 }}
+	        {...drawerProps}
+	      >
+      	  </Drawer>
     </div>);
 	}
 }

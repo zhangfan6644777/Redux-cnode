@@ -16,8 +16,8 @@ class Message extends React.Component {
 			gotoLogin
 		} = this.props
 		return (
-			<div>
-				<NavBar  onLeftClick={() => history.go(-1)}>
+			<div className='message'>
+				<NavBar>
 					消息
     			</NavBar>
     			{Login.success?<MessageList state={Message}/>:<div style={{padding:'60px',textAlign:'center'}}>请先<span style={{color:'#108ee9'}} onClick={()=>{gotoLogin('myinfo')}}>登录</span>之后再进行操作</div>}

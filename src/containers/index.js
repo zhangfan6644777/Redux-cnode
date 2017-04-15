@@ -13,6 +13,11 @@ import Message from './Message';
 import Login from './Login';
 
 import HashMap from '../utils/HashMapUtils';
+
+let messageIcon=require('../images/message.svg')
+import messageIconFill from '../images/message-fill.svg';
+
+console.log(messageIcon)
 class Index extends React.Component {
   constructor(props) {
     super(props);
@@ -54,6 +59,8 @@ class Index extends React.Component {
 
   }
   render() {
+  	let {state}=this.props
+  	console.log(state)
     return (
       <TabBar
         unselectedTintColor="#949494"
@@ -64,20 +71,13 @@ class Index extends React.Component {
         <TabBar.Item
           title="首页"
           key="首页"
-          icon={<div style={{
-            width: '0.44rem',
-            height: '0.44rem',
-            background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  0.42rem 0.42rem no-repeat' }}
-          />
+          icon={
+						<Icon type={require('../images/index.svg')}></Icon>  
           }
-          selectedIcon={<div style={{
-            width: '0.44rem',
-            height: '0.44rem',
-            background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  0.42rem 0.42rem no-repeat' }}
-          />
+          selectedIcon={
+						<Icon type={require('../images/index-fill.svg')}></Icon>  
           }
           selected={this.state.selectedTab === 'index'}
-          badge={1}
           onPress={() => {
             HashMap.put('selectedTab','index')
             this.setState({
@@ -89,11 +89,14 @@ class Index extends React.Component {
           {this.renderContent('首页')}
         </TabBar.Item>
         <TabBar.Item
-          icon={<Icon type="koubei-o" size="md" />}
-          selectedIcon={<Icon type="koubei" size="md" />}
+          icon={
+						<Icon type={require('../images/write.svg')}></Icon>  
+          }
+          selectedIcon={
+						<Icon type={require('../images/write-fill.svg')}></Icon>      	
+          }
           title="发布"
           key="发布"
-          badge={'new'}
           selected={this.state.selectedTab === 'publish'}
           onPress={() => {
             HashMap.put('selectedTab','publish')
@@ -107,22 +110,14 @@ class Index extends React.Component {
         </TabBar.Item>
         <TabBar.Item
           icon={
-            <div style={{
-              width: '0.44rem',
-              height: '0.44rem',
-              background: 'url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center /  0.42rem 0.42rem no-repeat' }}
-            />
+						<Icon type={require('../images/message.svg')}></Icon>   
           }
           selectedIcon={
-            <div style={{
-              width: '0.44rem',
-              height: '0.44rem',
-              background: 'url(https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg) center center /  0.42rem 0.42rem no-repeat' }}
-            />
+						<Icon type={require('../images/message-fill.svg')}></Icon>  
           }
           title="消息"
           key="消息"
-          dot
+          badge={state.Message.hasnot_read_messages.length}
           selected={this.state.selectedTab === 'message'}
           onPress={() => {
             HashMap.put('selectedTab','message');
@@ -135,8 +130,12 @@ class Index extends React.Component {
         </TabBar.Item>
         
         <TabBar.Item
-          icon={require('../images/index.svg')}
-          selectedIcon={{ uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' }}
+          icon={
+						<Icon type={require('../images/user.svg')}></Icon>            	
+          }
+          selectedIcon={
+						<Icon type={require('../images/user-fill.svg')}></Icon>            	
+          }
           title="我的"
           key="我的"
           selected={this.state.selectedTab === 'myinfo'}
@@ -153,4 +152,11 @@ class Index extends React.Component {
     );
   }
 }
-export default Index;
+
+function indexSelect(state){
+		return{
+			state:state
+		}
+}
+
+export default connect(indexSelect)(Index);

@@ -24,7 +24,7 @@ class PublishTopic extends React.Component {
 		} = this.props;
 
 		return (
-			<div>
+			<div className='publishTopic'>
 				<NavBar>
 					发布
 	    		</NavBar>

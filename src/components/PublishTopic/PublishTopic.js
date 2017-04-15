@@ -1,4 +1,5 @@
 import React from 'react';
+require('./PublishTopic.less');
 const data = [{
 	label: '分享',
 	value: "share"
