@@ -3,7 +3,8 @@ import {
 	Card,
 	Tabs,
 	WhiteSpace,
-	List
+	List,
+	Badge
 } from 'antd-mobile';
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -15,12 +16,23 @@ require('./MessageList.less')
 import GetTime from '../../utils/GetTime';
 
 class Message extends React.Component {
+	constructor(){
+		super();
+		this.handleTabClick=this.handleTabClick.bind(this);
+	}
+	handleTabClick(key) {
+		let {dispatch,actions,state,login}=this.props;
+		if(key==2&&(state.hasnot_read_messages.length==0)){
+			//console.log(login)
+			dispatch(actions.markall_Message(login.accesstoken))
+		}
+	}
 	render() {
 		let {
 			state
 		} = this.props
 		return (
-			<Tabs defaultActiveKey="1" animated={false}>
+			<Tabs defaultActiveKey="1" animated={false} onTabClick={this.handleTabClick}>
 				    <TabPane tab="已读消息" key="1">
 				        <div  style={{ display: 'flex', backgroundColor: '#fff',height:'10.6rem'}}>
 				        	<List className="my-list" style={{width:'100%'}}>
@@ -38,9 +50,9 @@ class Message extends React.Component {
 				           </List>
 				        </div>
 				    </TabPane>
-					<TabPane tab="未读消息" key="2">
+					<TabPane tab={<div>未读消息   <Badge text={state.hasnot_read_messages.length}/></div>} key="2" >
 				        <div style={{ display: 'flex', backgroundColor: '#fff',height:'10.6rem' }}>
-				        	<List className="my-list" style={{width:'100%'}}>
+				        	<List className="my-list" style={{width:'100%'}} onClick={()=>alert(1)}>
 				           {state.hasnot_read_messages.map(function(index,key){
 				           	return(
 									<Item extra={GetTime.getTime(new Date(),index.reply.create_at)} align="middle" wrap  thumb={index.author.avatar_url} multipleLine>

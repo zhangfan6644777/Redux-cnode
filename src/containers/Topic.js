@@ -89,28 +89,17 @@ class HomePage extends React.Component {
 			//中的dispatch  此时正好fetching==false 
 	}
 	scroll(divdom, listdom) {
-		//console.log(this)
-		console.log(divdom.scrollTop);
-		console.log(divdom.offsetHeight);
-		console.log(listdom.offsetHeight);
 		if(divdom.scrollTop+divdom.offsetHeight>=listdom.offsetHeight){
 			this.loadmore();
 		}
-		//console.log(listdom.offsetTop);
-		//this.loadmore()
 	}
 	loadmore(){
 		let {dispatch,state,actions}=this.props;
-		//alert(state.tabData.limit)
 		let num=state.tabData.limit;
 		num=num+10;
 		if(!state.tabData.isFecthing){
 			dispatch(actions.request_topic(state.selectedTab,1,num));
-			//this.loadCtrl=false;
-		}
-		//alert(1)
-		//console.log(this)
-		
+		}	
 	}
 	render() {
 		let {

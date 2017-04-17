@@ -13,14 +13,16 @@ class Message extends React.Component {
 		let {
 			Login,
 			Message,
-			gotoLogin
+			gotoLogin,
+			dispatch,
+			actions
 		} = this.props
 		return (
 			<div className='message'>
 				<NavBar>
 					消息
     			</NavBar>
-    			{Login.success?<MessageList state={Message}/>:<div style={{padding:'60px',textAlign:'center'}}>请先<span style={{color:'#108ee9'}} onClick={()=>{gotoLogin('myinfo')}}>登录</span>之后再进行操作</div>}
+    			{Login.success?<MessageList dispatch={dispatch} actions={actions} login={Login} state={Message}/>:<div style={{padding:'60px',textAlign:'center'}}>请先<span style={{color:'#108ee9'}} onClick={()=>{gotoLogin('myinfo')}}>登录</span>之后再进行操作</div>}
 			</div>
 		)
 	}

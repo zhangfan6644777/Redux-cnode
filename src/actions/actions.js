@@ -77,10 +77,10 @@ let actions = {
 	},
 	request_collectArticle: (accessToken, articleId) => (dispatch, getState) => {
 		console.log('接口现在有问题')
-		return
-		const postConent = replyId ? `accesstoken=${accessToken}&content=${content}&replyId=${replyId}`:`accesstoken=${accessToken}&content=${content}`
-		https://cnodejs.org/api/v1/topic/${topicId}/replies
-		fetch(`https://cnodejs.org/topic/collect`, {
+		//return
+		console.log(accessToken)
+		console.log(articleId)
+		fetch(`https://cnodejs.org/api/v1/topic_collect/collect`, {
 				method: 'POST',
 				headers: {
 					"Content-Type": "application/x-www-form-urlencoded"
@@ -228,6 +228,19 @@ let actions = {
 		has_read_messages,
 		hasnot_read_messages
 	}),
+	markall_Message:(accessToken)=>(dispatch,getState)=>{
+    	fetch(`https://cnodejs.org/api/v1/message/mark_all`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: `accesstoken=${accessToken}`
+        })
+		.then(res=>res.json())
+		.then(data=>{
+			console.log(data)
+		})
+	},
 	//PublishTopic
 	request_PublishTopic: (accesstoken, select, title, content) => (dispatch, getState) => {
 		if (getState().isFetching) return
