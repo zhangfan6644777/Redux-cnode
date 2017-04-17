@@ -20,10 +20,9 @@ class UserInfo extends React.Component {
 	render() {
 		let {
 			userinfo,
-			collect
+			collect,
+			gotoLogin
 		} = this.props;
-		console.log(userinfo)
-		console.log(collect)
 		if (JSON.stringify(userinfo) != '{}' && collect) {
 			return (
 				<div>
@@ -38,20 +37,21 @@ class UserInfo extends React.Component {
 			      </Card.Body>
 			      <Card.Footer content={'创建于'+GetTime.getTime(new Date(),userinfo.create_at)}/>
 			    </Card>
-			    <Tabs defaultActiveKey="1"  onChange={callback}>
-				    <TabPane tab="我发布的主题" key="1">
-				        <div  style={{ display: 'flex', backgroundColor: '#fff',height:'7.5rem'}}>
+			    <Tabs defaultActiveKey="1" swipeable={false} onChange={callback}>
+				    <TabPane tab="发布的话题" key="1">
+				        <div  style={{ display: 'flex', backgroundColor: '#fff',height:'7.4rem'}}>
 				           <ul className='userTopic'>
 				           {userinfo.recent_topics.map(function(index,key){
 				           	return(
 									<Link key={key} to={`/arcitle/${index.id}`}><li><p>{index.title}</p><p>{GetTime.getTime(new Date(),index.last_reply_at)}</p></li></Link>
 				           		)
 				           })}
+				           <div style={{display:userinfo.recent_topics.length==0?'block':'none',textAlign:'center',padding:'36px 0'}}>还没有发不过任何话题,快来<span style={{color:'#108ee9'}} onClick={()=>gotoLogin('publish')}>发布</span>一个吧</div>
 				           </ul>
 				        </div>
 				    </TabPane>
-					<TabPane tab="我参与的话题" key="2">
-				        <div style={{ display: 'flex', backgroundColor: '#fff',height:'7.5rem' }}>
+					<TabPane tab="参与的话题" key="2">
+				        <div style={{ display: 'flex', backgroundColor: '#fff',height:'7.4rem' }}>
 				           <ul className='userTopic'>
 				           {userinfo.recent_replies.map(function(index,key){	
 				           	return(
@@ -61,8 +61,8 @@ class UserInfo extends React.Component {
 				           </ul>
 				        </div>
 				    </TabPane>
-				    <TabPane tab="我收藏的话题" key="3">
-				        <div style={{ display: 'flex', backgroundColor: '#fff',height:'7.5rem' }}>
+				    <TabPane tab="收藏的话题" key="3">
+				        <div style={{ display: 'flex', backgroundColor: '#fff',height:'7.4rem' }}>
 				           <ul className='userTopic'>
 				           {collect.map(function(index,key){	
 				           	return(

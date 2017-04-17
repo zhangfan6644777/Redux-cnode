@@ -14,7 +14,7 @@ import Login from './Login';
 
 import HashMap from '../utils/HashMapUtils';
 
-let messageIcon=require('../images/message.svg')
+let messageIcon = require('../images/message.svg')
 import messageIconFill from '../images/message-fill.svg';
 
 console.log(messageIcon)
@@ -53,14 +53,16 @@ class Index extends React.Component {
       )
     } else if (pageText == '我的') {
       return (
-        <Login actions={actions} />
+        <Login gotoLogin={(tab)=>this.gotoLogin(tab)} actions={actions} />
       )
     }
 
   }
   render() {
-  	let {state}=this.props
-  	console.log(state)
+    let {
+      state
+    } = this.props
+    console.log(state)
     return (
       <TabBar
         unselectedTintColor="#949494"
@@ -153,10 +155,10 @@ class Index extends React.Component {
   }
 }
 
-function indexSelect(state){
-		return{
-			state:state
-		}
+function indexSelect(state) {
+  return {
+    state: state
+  }
 }
 
 export default connect(indexSelect)(Index);

@@ -41,15 +41,15 @@ class list extends React.Component {
     //   }
     // }<FlipMove enterAnimation={enterAnimation} easing='ease-out' duration='4000' staggerDelayBy='40' staggerDurationBy='4'>
     //    </FlipMove>
-    // console.log('qqqqqqqqqqqqqq')
+    // console.log('qqqqqqqqqqqqqq')extra={index.create_at.substring(0,10)}
     return (
       <div ref='mylistdiv' onScroll={()=>this.props.scroll(ReactDOM.findDOMNode(this.refs.mylistdiv),ReactDOM.findDOMNode(this.refs.mylist))} style={{height:document.documentElement.clientHeight-276,overflow:'auto'}}>
         <List ref='mylist'  className="my-list" >
               {state.map(function(index){
                 return(
                   <Link key={index.id} to={`/arcitle/${index.id}`} style={{display:'block'}} >
-                    <Item  extra={index.create_at.substring(0,10)} align="bottom" thumb={index.author.avatar_url} multipleLine>
-                      {index.title}<Brief>{index.reply_count}/{index.visit_count} 分享</Brief>
+                    <Item align="bottom" thumb={index.author.avatar_url} multipleLine>
+                      {index.top?<span style={{color:'red',marginRight:'15px',fontWeight:'bold'}}>顶</span>:''}{index.good?<span style={{color:'blue',marginRight:'15px',fontWeight:'bold'}}>精</span>:''}{index.title}<Brief>{index.reply_count}/{index.visit_count} 分享<span style={{float:'right'}}>{index.create_at.substring(0,10)}</span></Brief>
                     </Item>
                   </Link>
                 )

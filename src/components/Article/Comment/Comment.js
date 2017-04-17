@@ -96,6 +96,10 @@ class Comment extends React.Component {
 									      <Card.Footer content={GetTime.getTime(new Date(),index.create_at)} extra={
 									      	<div>
 									      	<Icon onClick={()=>{
+									      		if(!Login.success){
+									      			Toast.fail('请先登录后再进行操作!!!', 1);
+									      			return									      			
+									      		}
 									      		if(Login.loginname==index.author.loginname){
 									      			Toast.fail('不能给自己点赞!!!', 1);
 									      			return
@@ -111,7 +115,14 @@ class Comment extends React.Component {
 				
 									      		}} type={_this.upComment[key]?require('../../../images/agree-fill.svg'):require('../../../images/agree.svg')}></Icon>
 									      	&nbsp;{index.ups.length}&nbsp;
-									      	<Icon onClick={()=>_this.setState({replyOther:!_this.state.replyOther,replyId:index.id})} type={require('../../../images/forward.svg')}></Icon>
+									      	<Icon onClick={()=>{
+									      		if(!Login.success){
+									      			Toast.fail('请先登录后再进行操作!!!', 1);
+									      			return									      			
+									      		}
+									      		_this.setState({replyOther:!_this.state.replyOther,replyId:index.id})
+									      		}} 
+									      		type={require('../../../images/forward.svg')}></Icon>
 									      	</div>} />
 									    </Card>
 									    <div style={{display:(_this.state.replyOther&&_this.state.replyId==index.id)?"block":"none"}}>
@@ -141,17 +152,31 @@ class Comment extends React.Component {
 				            	count={200}
 				            	clear
 				            />
- 							< Button onClick = {() => {
+ 							<Button onClick = {() => {
 								const content = getFieldProps('count').value;
 								comment(Login.accesstoken, Article.data.id, content)
 								}}
 							className = "btn" type = "primary" > 回复 < /Button>
-		        		</List>:<div style={{padding:'60px',textAlign:'center'}}>请先<span style={{color:'#108ee9'}} >登录</span>之后再进行操作</div>
-        			}
+		        		</List>:<div style={{padding:'60px',textAlign:'center'}}>请先<span style={{color:'#108ee9'}} >登录</span>之后再进行操作</div>}
         			</div>
 			)
 		} else {
-			return (<div style={{padding:'60px',textAlign:'center'}}>请先<span style={{color:'#108ee9'}} onClick={()=>{gotoLogin('myinfo')}}>登录</span>之后再进行操作</div>)
+			return (<div>
+						{Login.success?
+						<List renderHeader={() => '添加回复'}>
+				            <TextareaItem
+				            	{...getFieldProps('count', {})}
+				            	rows={5}
+				            	count={200}
+				            	clear
+				            />
+ 							<Button onClick = {() => {
+								const content = getFieldProps('count').value;
+								comment(Login.accesstoken, Article.data.id, content)
+								}}
+							className = "btn" type = "primary" > 回复 < /Button>
+		        		</List>:<div style={{padding:'60px',textAlign:'center'}}>请先<span style={{color:'#108ee9'}} >登录</span>之后再进行操作</div>}
+			</div>)
 		}
 
 	}

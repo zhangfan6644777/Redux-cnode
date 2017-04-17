@@ -15,8 +15,6 @@ import actions from '../actions/actions';
 import UserInfo from '../components/Login/UserInfo/UserInfo';
 class Login extends React.Component {
 	componentWillReceiveProps(newProps) {
-		console.log('我是newProps')
-		console.log(newProps)
 		let {
 			actions,
 			dispatch,
@@ -37,7 +35,7 @@ class Login extends React.Component {
 			state
 		} = this.props
 		return (
-			<div>
+			<div className="otherInfo">
 				<NavBar onLeftClick={() => history.go(-1)}>
 					详情
     			</NavBar>

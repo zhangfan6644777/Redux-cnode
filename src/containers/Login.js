@@ -62,7 +62,8 @@ class Login extends React.Component {
 		let {
 			actions,
 			dispatch,
-			state
+			state,
+			gotoLogin
 		} = this.props
 		return (
 			<div className='myLogin'>
@@ -73,7 +74,7 @@ class Login extends React.Component {
 				    ])} size='md' type={require('../images/logout.svg')} style={{ marginRight: '0.1rem',display:state.Login.success?'block':'none' }} />}>
 					个人中心
     			</NavBar>
-    			{state.Login.success?<UserInfo userinfo={state.UserInfo.userInfo} collect={state.UserInfo.collect}  />:<UserLogin login={this.login.bind(this)} state={state}/>}
+    			{state.Login.success?<UserInfo gotoLogin={gotoLogin} userinfo={state.UserInfo.userInfo} collect={state.UserInfo.collect}  />:<UserLogin login={this.login.bind(this)} state={state}/>}
 			</div>
 		)
 	}
