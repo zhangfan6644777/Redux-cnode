@@ -110,10 +110,13 @@ class HomePage extends React.Component {
 			state,
 			actions,
 			dispatch,
+			Login,
+			UserInfo,
+			gotoLogin
 		} = this.props;
 		myAction = actions;
 		mYdispatch = dispatch;
-		console.log(this);
+		console.log(Login);
 		let _this = this;
 		let defaultActiveKey;
 		if (state.selectedTab == 'all') { //解决go(-1)的时候 渲染不出的问题
@@ -131,7 +134,7 @@ class HomePage extends React.Component {
 		}
 		return (
 			<div style={{height:document.documentElement.clientHeight-99}}>
-				<Header/>
+				<Header UserInfo={UserInfo} gotoLogin={gotoLogin} login={Login}/>
       			<div>
 				    <Tabs defaultActiveKey={defaultActiveKey} animated={false} onChange={this.callback}>
 						{tab.map(function(index){
@@ -150,7 +153,9 @@ class HomePage extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		state: state.Topic
+		state: state.Topic,
+		Login: state.Login,
+		UserInfo: state.UserInfo
 	}
 }
 export default connect(mapStateToProps)(HomePage)

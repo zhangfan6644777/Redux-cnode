@@ -41,7 +41,7 @@ class Index extends React.Component {
 
     if (pageText == '首页') {
       return (
-        <Topic  actions={actions} />
+        <Topic gotoLogin={(tab)=>this.gotoLogin(tab)} actions={actions} />
       );
     } else if (pageText == '发布') {
       return (

@@ -14,7 +14,7 @@ class UserLogin extends React.Component {
 		return (
 			<List style={{margin:60,marginTop:350}}>
     				<List.Item>
-						<InputItem ref='input' placeholder='Access Token' style={{border:'1px solid #CCC'}}/>
+						<InputItem ref='input' placeholder='cnode社区设置最下面查看Token' style={{border:'1px solid #CCC'}}/>
 						<Button onClick={()=>{
 							const access_token=this.refs.input.refs.input.value;
 							this.login(access_token)

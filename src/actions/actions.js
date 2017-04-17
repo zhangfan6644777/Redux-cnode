@@ -77,15 +77,23 @@ let actions = {
 	},
 	request_collectArticle: (accessToken, articleId) => (dispatch, getState) => {
 		console.log('接口现在有问题')
-		//return
+			//return
 		console.log(accessToken)
 		console.log(articleId)
-		fetch(`https://cnodejs.org/api/v1/topic_collect/collect`, {
+		let url = `https://cnodejs.org/topic/collect`;
+		let urll = `https://cnodejs.org/api/v1/topic_collect/collect`
+		fetch(url, {
 				method: 'POST',
+				mode: "no-cors",
 				headers: {
-					"Content-Type": "application/x-www-form-urlencoded"
+					"Content-Type": "application/json; charset=utf-8"
+						//"Content-Type": "application/x-www-form-urlencoded"
 				},
-				body: `accesstoken=${accessToken}&topic_Id=${articleId}`
+				body: JSON.stringify({
+						accesstoken: accessToken,
+						topic_id: articleId
+					})
+					//body: `accesstoken=${accessToken}&topic_Id=${articleId}`
 			})
 			.then(res => res.json())
 			.then(data => {
@@ -228,18 +236,18 @@ let actions = {
 		has_read_messages,
 		hasnot_read_messages
 	}),
-	markall_Message:(accessToken)=>(dispatch,getState)=>{
-    	fetch(`https://cnodejs.org/api/v1/message/mark_all`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body: `accesstoken=${accessToken}`
-        })
-		.then(res=>res.json())
-		.then(data=>{
-			console.log(data)
-		})
+	markall_Message: (accessToken) => (dispatch, getState) => {
+		fetch(`https://cnodejs.org/api/v1/message/mark_all`, {
+				method: 'POST',
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded"
+				},
+				body: `accesstoken=${accessToken}`
+			})
+			.then(res => res.json())
+			.then(data => {
+				console.log(data)
+			})
 	},
 	//PublishTopic
 	request_PublishTopic: (accesstoken, select, title, content) => (dispatch, getState) => {
