@@ -42,7 +42,7 @@
   <Link to={{pathname:link,state:data}}>
   ```
 
-7.对es6有了进一步的了解,推荐阮大神的书籍[ECMAScript 6 入门](http://es6.ruanyifeng.com/)
+7.对es6有了进一步的了解,推荐阮大神的书籍[ECMAScript 6 入门](http://es6.ruanyifeng.com/) 
 
 - class写法 如果使用es6的class类继承react的component组件，constructor中必须调用super，因为子类需要用super继承component的this，否则实例化的时候会报错。
 - 方法要绑定bind(this)才可以使用,与es5的React.createClass不同,es5的方式是自动绑定到this上的。
