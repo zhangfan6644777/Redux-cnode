@@ -19,8 +19,6 @@ class Login extends React.Component {
 		this.logout = this.logout.bind(this);
 	}
 	componentWillReceiveProps(newProps) {
-		console.log('我是newProps')
-		console.log(newProps)
 		let {
 			actions,
 			dispatch,

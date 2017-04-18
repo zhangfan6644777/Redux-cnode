@@ -16,30 +16,37 @@ require('./MessageList.less')
 import GetTime from '../../utils/GetTime';
 
 class Message extends React.Component {
-	constructor(){
+	constructor() {
 		super();
-		this.handleTabClick=this.handleTabClick.bind(this);
+		this.handleTabClick = this.handleTabClick.bind(this);
 	}
 	handleTabClick(key) {
-		let {dispatch,actions,state,login}=this.props;
-		if(key==2&&(state.hasnot_read_messages.length==0)){
-			//console.log(login)
-			dispatch(actions.markall_Message(login.accesstoken))
+		let {
+			dispatch,
+			actions,
+			state,
+			Login
+		} = this.props;
+		if (key == 2 && (state.hasnot_read_messages.length != 0)) {
+			dispatch(actions.markall_Message(Login.accesstoken))
 		}
 	}
 	render() {
 		let {
-			state
+			state,
+			markMessage,
+			Login
 		} = this.props
+		console.log(this.props)
 		return (
-			<Tabs defaultActiveKey="1" animated={false} onTabClick={this.handleTabClick}>
+			<Tabs defaultActiveKey="1" animated={false}>
 				    <TabPane tab="已读消息" key="1">
 				        <div  style={{ display: 'flex', backgroundColor: '#fff',height:'10.6rem'}}>
 				        	<List className="my-list" style={{width:'100%'}}>
 				           {state.has_read_messages.map(function(index,key){
 				           	return(	
 								<Item key={key} extra={GetTime.getTime(new Date(),index.reply.create_at)} align="middle" wrap  thumb={index.author.avatar_url} multipleLine>
-	         						<Link to={`/arcitle/${index.topic.id}`}>
+	         						<Link  to={`/arcitle/${index.topic.id}`}>
 		         						<div dangerouslySetInnerHTML={{__html:index.reply.content}}></div>	 
 		         						<Brief>来自:{index.topic.title}</Brief>
 	         						</Link>
@@ -55,8 +62,8 @@ class Message extends React.Component {
 				        	<List className="my-list" style={{width:'100%'}} onClick={()=>alert(1)}>
 				           {state.hasnot_read_messages.map(function(index,key){
 				           	return(
-									<Item extra={GetTime.getTime(new Date(),index.reply.create_at)} align="middle" wrap  thumb={index.author.avatar_url} multipleLine>
-	         							<Link to={`/arcitle/${index.topic.id}`}>	 
+									<Item key={key} extra={GetTime.getTime(new Date(),index.reply.create_at)} align="middle" wrap  thumb={index.author.avatar_url} multipleLine>
+	         							<Link onClick={()=>markMessage(Login.accesstoken,index.id)} to={`/arcitle/${index.topic.id}`}>	 
 	         								 <div dangerouslySetInnerHTML={{__html:index.reply.content}}></div>
 	         								 <Brief>来自:{index.topic.title}</Brief>
         								</Link>

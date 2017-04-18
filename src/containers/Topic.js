@@ -46,8 +46,6 @@ class HomePage extends React.Component {
 
 	}
 	componentDidMount() {
-		//console.log(this.props)
-		//console.log("haha")
 		let {
 			actions,
 			dispatch,
@@ -56,7 +54,6 @@ class HomePage extends React.Component {
 		let {
 			selectedTab
 		} = state
-		//console.log(selectedTab)
 		dispatch(actions.selectTab(selectedTab))
 			//dispatch(actions.request_topic(selectedTab))
 	}
@@ -66,7 +63,6 @@ class HomePage extends React.Component {
 			dispatch
 		} = newProps;
 		//console.log('我是newProps')
-		console.log(newProps)
 		let {
 			topics,
 			isFetching
@@ -116,7 +112,6 @@ class HomePage extends React.Component {
 		} = this.props;
 		myAction = actions;
 		mYdispatch = dispatch;
-		console.log(Login);
 		let _this = this;
 		let defaultActiveKey;
 		if (state.selectedTab == 'all') { //解决go(-1)的时候 渲染不出的问题

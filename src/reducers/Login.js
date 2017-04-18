@@ -4,7 +4,7 @@ const LoginReducers = (state = {
 	let newState
 	switch (action.type) {
 		case 'SUCCESS_LOGIN':
-			console.log('登录成功');
+			//console.log('登录成功');
 			state = {};
 			state.success = true;
 			state.loginname = action.loginname;
@@ -13,7 +13,7 @@ const LoginReducers = (state = {
 			newState = Object.assign({}, state)
 			return newState
 		case 'FAIL_LOGIN':
-			console.log('登录失败');
+			//console.log('登录失败');
 			state = {};
 			state.success = false;
 			state.failmessage = action.error_msg;

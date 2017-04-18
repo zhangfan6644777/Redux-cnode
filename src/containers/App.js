@@ -16,7 +16,6 @@ class App extends React.Component {
 			//console.log('masterInfo')
 			dispatch(actions.request_AccessToken(userInfo.accesstoken))
 			dispatch(actions.request_UserInfo(userInfo.loginname));
-			dispatch(actions.request_Message(userInfo.accesstoken));
 
 		}
 	}

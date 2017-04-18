@@ -7,11 +7,11 @@ const PublishTopicReducers = (state = {
 	let newState;
 	switch (action.type) {
 		case 'REQUEST_PUBLISHTOPIC':
-			console.log('kaishi')
+			//console.log('kaishi')
 			state.isFetching = true;
 			newState = Object.assign({}, state);
 			Toast.loading('发布中...', 1, () => {
-				console.log('加载完成!!!');
+				//console.log('加载完成!!!');
 			});
 			return newState
 		case 'RECEIVE_PUBLISHTOPIC':

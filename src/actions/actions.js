@@ -12,7 +12,6 @@ let actions = {
 		fetch(url).then(function(res) {
 			return res.json()
 		}).then(function(data) {
-			console.log(data)
 			dispatch(actions.receiveTopic(tab, data.data, page, limit))
 		}).catch(e => console.log(e))
 	},
@@ -39,12 +38,16 @@ let actions = {
 	request_article: (id) => (dispatch, getState) => {
 		let url = `https://cnodejs.org/api/v1/topic/${id}`;
 		if (getState().isFetching) return
-		dispatch(actions.requestArticle())
 		fetch(url).then(function(res) {
+			alert(222)
+				//if (!res.ok) return
+				//dispatch(actions.requestArticle())
 			return res.json()
 		}).then(function(data) {
-			dispatch(actions.receiveArticle(data.data, id))
-		}).catch(e => console.log(e))
+			if (getState().isFetching) {
+				dispatch(actions.receiveArticle(data.data, id))
+			}
+		}).catch(e => alert(111))
 	},
 	requestArticle: (id) => ({
 		type: 'REQUEST_ARTICLE',
@@ -115,7 +118,6 @@ let actions = {
 			})
 			.then(res => res.json())
 			.then(data => {
-				console.log(data)
 				dispatch({
 					type: 'COMMENT_ARTICLE',
 					success: data.success,
@@ -236,8 +238,8 @@ let actions = {
 		has_read_messages,
 		hasnot_read_messages
 	}),
-	markall_Message: (accessToken) => (dispatch, getState) => {
-		fetch(`https://cnodejs.org/api/v1/message/mark_all`, {
+	mark_Message: (accessToken, msgId) => (dispatch, getState) => {
+		fetch(`https://cnodejs.org/api/v1/message/mark_one/${msgId}`, {
 				method: 'POST',
 				headers: {
 					"Content-Type": "application/x-www-form-urlencoded"

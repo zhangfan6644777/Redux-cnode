@@ -14,10 +14,7 @@ import Login from './Login';
 
 import HashMap from '../utils/HashMapUtils';
 
-let messageIcon = require('../images/message.svg')
-import messageIconFill from '../images/message-fill.svg';
 
-console.log(messageIcon)
 class Index extends React.Component {
   constructor(props) {
     super(props);
@@ -62,7 +59,6 @@ class Index extends React.Component {
     let {
       state
     } = this.props
-    console.log(state)
     return (
       <TabBar
         unselectedTintColor="#949494"

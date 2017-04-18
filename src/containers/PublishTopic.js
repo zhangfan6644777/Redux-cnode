@@ -9,6 +9,10 @@ import Publish from '../components/PublishTopic/PublishTopic';
 import HashMap from '../utils/HashMapUtils';
 
 class PublishTopic extends React.Component {
+	constructor(...arg) {
+		super(...arg);
+		this.publish = this.publish.bind(this);
+	}
 	publish(accesstoken, select, title, content) {
 		let {
 			dispatch,
@@ -22,20 +26,19 @@ class PublishTopic extends React.Component {
 			PublishTopic,
 			gotoLogin
 		} = this.props;
-
+		let publish = this.publish;
 		return (
 			<div className='publishTopic'>
 				<NavBar>
 					发布
 	    		</NavBar>
-				{Login.success?<Publish PublishTopic={PublishTopic}/>:<div style={{padding:'60px',textAlign:'center'}}>请先<span style={{color:'#108ee9'}} onClick={()=>{gotoLogin('myinfo')}}>登录</span>之后再进行操作</div>}
+				{Login.success?<Publish {...({Login,PublishTopic,publish})}/>:<div style={{padding:'60px',textAlign:'center'}}>请先<span style={{color:'#108ee9'}} onClick={()=>{gotoLogin('myinfo')}}>登录</span>之后再进行操作</div>}
 			</div>
 		)
 	}
 }
 
 function PublishTopicSelect(state) {
-	//console.log(state)
 	let {
 		Login,
 		PublishTopic

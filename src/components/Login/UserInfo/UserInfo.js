@@ -14,7 +14,7 @@ require('./UserInfo.less');
 import GetTime from '../../../utils/GetTime';
 
 function callback(key) {
-	console.log(key);
+
 }
 class UserInfo extends React.Component {
 	render() {

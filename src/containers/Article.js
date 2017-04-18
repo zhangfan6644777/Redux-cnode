@@ -39,19 +39,19 @@ class Article extends React.Component {
 		dispatch(actions.request_commentArticle(accesstoken, topicid, content, commentid));
 	}
 	render() {
-		console.log(this)
 		let {
 			Article,
 			Login,
 			dispatch
 		} = this.props;
-		//eval('method("myinfo")'); //调用函数，传入参数
+		console.log(Article)
+			//eval('method("myinfo")'); //调用函数，传入参数
 		return (
 			<div>
 				<NavBar  onLeftClick={() => history.go(-1)}>
 					详情
     			</NavBar>
-    			{Article.data.id?<div><Content dispatch={dispatch} Login={Login} actions={actions} Article={Article}/><Comment like={this.like} comment={this.comment}  dispatch={dispatch} actions={actions} Article={Article} Login={Login}/></div>:<ActivityIndicator size="large" />}
+    			{Article.data.id?<div><Content dispatch={dispatch} Login={Login} actions={actions} Article={Article}/><Comment like={this.like} comment={this.comment}  {...({dispatch,actions,Article,Login})}/></div>:<ActivityIndicator size="large" />}
 			</div>
 		)
 	}

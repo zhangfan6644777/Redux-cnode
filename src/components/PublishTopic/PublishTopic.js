@@ -52,8 +52,11 @@ class Publish extends React.Component {
 			getFieldProps
 		} = this.props.form;
 		const {
-			PublishTopic
+			Login,
+			PublishTopic,
+			publish
 		} = this.props;
+		console.log(this.props)
 		return (
 			<div>
 				<Picker data={data} cols={1} {...getFieldProps('select')} className="forss">
@@ -101,9 +104,8 @@ class Publish extends React.Component {
         				this.showModal('modal5');
         				return
         			}
-        			//console.log(this)
         			const accesstoken=Login.accesstoken
-        			this.publish(accesstoken,select.toString(),title,content)
+        			publish(accesstoken,select.toString(),title,content)
         			}} className="btn" type="primary" style={{margin:'10%',width:'80%'}}>发布</Button>
 					<Modal
 			          title="发布失败"

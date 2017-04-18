@@ -9,7 +9,7 @@ const OtherInfoReducers = (state = {
 			newState = Object.assign({}, state)
 			return newState
 		case 'RECEIVE_OTHERINFO':
-			console.log('成功')
+			//console.log('成功')
 			state.isFetching = false;
 			state.otherInfo = action.otherinfo
 			newState = Object.assign({}, state)
