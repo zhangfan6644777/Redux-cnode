@@ -4,7 +4,6 @@ import {
   List,
   RefreshControl
 } from 'antd-mobile';
-import FlipMove from 'react-flip-move';
 import {
   Link
 } from 'react-router';
