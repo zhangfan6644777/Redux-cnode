@@ -20,7 +20,6 @@ class Message extends React.Component {
 			Login
 		} = this.props;
 		dispatch(actions.request_Message(Login.accesstoken));
-
 	}
 	markMessage(accesstoken, msgid) {
 		let {

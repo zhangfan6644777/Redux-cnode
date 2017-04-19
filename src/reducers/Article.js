@@ -23,9 +23,6 @@ const TopicReducers = (state = {
 			newState = Object.assign({}, state)
 			return newState
 		case 'UP_COMMENT':
-			// state.commentUps = action.data;
-			// state.commentUps.replyId = action.replyId;
-			// state.commentUps.reply = action.reply;
 			state.upComment[action.key] = action.action;
 			newState = Object.assign({}, state)
 			return newState

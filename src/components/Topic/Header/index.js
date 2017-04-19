@@ -37,10 +37,11 @@ class header extends React.Component {
 		let sidebar;
 		if (login.success && JSON.stringify(UserInfo.userInfo) != '{}' && UserInfo.collect) {
 			sidebar = (
-				<div style={{width:document.documentElement.clientWidth*3/4}}>
-					<p style={{textAlign:'center'}}><img onClick={()=>gotoLogin('myinfo')} src={UserInfo.userInfo.avatar_url}/></p>
+				<div id='Drawer' style={{width:document.documentElement.clientWidth*3/4}}>
+					<p style={{textAlign:'center'}}><img style={{width:230,height:230}} src={UserInfo.userInfo.avatar_url}/></p>
+					<p style={{textAlign:'center'}}><Button type="primary" inline onClick={()=>gotoLogin('myinfo')}>个人详情</Button></p>
 			        <Accordion defaultActiveKey="0" className="my-accordion">
-			          <Accordion.Panel header="发布的话题">
+			          <Accordion.Panel header="发布的话题" className="pad">
 			            <List>
 			          		{UserInfo.userInfo.recent_topics.map(function(index,key){	
 					           	return(
@@ -83,7 +84,7 @@ class header extends React.Component {
 			onOpenChange: this.onOpenChange.bind(this),
 		};
 		return (<div>
-		<NavBar iconName="ellipsis" onLeftClick={this.onOpenChange.bind(this)}>基本</NavBar>
+		<NavBar iconName="ellipsis" onLeftClick={this.onOpenChange.bind(this)}>首页</NavBar>
 	      <Drawer
 	        className="my-drawer"
 	        style={{height:document.documentElement.clientHeight-189}}

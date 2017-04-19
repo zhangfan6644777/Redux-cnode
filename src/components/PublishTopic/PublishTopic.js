@@ -56,7 +56,6 @@ class Publish extends React.Component {
 			PublishTopic,
 			publish
 		} = this.props;
-		console.log(this.props)
 		return (
 			<div>
 				<Picker data={data} cols={1} {...getFieldProps('select')} className="forss">

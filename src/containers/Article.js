@@ -44,15 +44,17 @@ class Article extends React.Component {
 			Login,
 			dispatch
 		} = this.props;
-		console.log(Article)
-			//eval('method("myinfo")'); //调用函数，传入参数
+		//method("myinfo"); //调用函数，传入参数
 		return (
 			<div>
-				<NavBar  onLeftClick={() => history.go(-1)}>
-					详情
-    			</NavBar>
-    			{Article.data.id?<div><Content dispatch={dispatch} Login={Login} actions={actions} Article={Article}/><Comment like={this.like} comment={this.comment}  {...({dispatch,actions,Article,Login})}/></div>:<ActivityIndicator size="large" />}
-			</div>
+				<div style={{position:'fixed',top:0,width:'100%',zIndex:99999}}>
+					<NavBar  onLeftClick={() => history.go(-1)}>
+						详情
+		    		</NavBar>
+				</div>
+
+	    		{Article.data.id?<div style={{marginTop:'90'}}><Content dispatch={dispatch} Login={Login} actions={actions} Article={Article}/><Comment like={this.like} comment={this.comment}  {...({dispatch,actions,Article,Login})}/></div>: <ActivityIndicator size="large" />}
+    		</div>
 		)
 	}
 }

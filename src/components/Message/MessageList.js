@@ -37,7 +37,6 @@ class Message extends React.Component {
 			markMessage,
 			Login
 		} = this.props
-		console.log(this.props)
 		return (
 			<Tabs defaultActiveKey="1" animated={false}>
 				    <TabPane tab="已读消息" key="1">

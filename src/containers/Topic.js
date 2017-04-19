@@ -2,11 +2,11 @@ import React from 'react';
 import {
 	connect
 } from 'react-redux';
-import Header from '../components/Homepage/Header/index';
-import List from '../components/Homepage/List/index';
+import Header from '../components/Topic/Header/index';
+import List from '../components/Topic/List/index';
 //import List from '../components/Homepage/List/qwe';
 
-import Loadmore from '../components/Homepage/Loadmore/Loadmore';
+import Loadmore from '../components/Topic/Loadmore/loadmore';
 import {
 	Tabs,
 	WhiteSpace,
@@ -15,7 +15,6 @@ import {
 const TabPane = Tabs.TabPane;
 let myAction, mYdispatch; //保存action和dispatch
 
-//let presentState;
 let tab = [{
 	name: '全部',
 	tab: 'all',

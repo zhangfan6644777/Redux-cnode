@@ -21,7 +21,6 @@ const Topic = (state = {
 			newState = Object.assign({}, state)
 			return newState
 		case 'RECEIVE_TOPICS':
-			alert(33)
 			state.tabData.isFetching = false;
 			state.tabData.page = action.page;
 			//console.log("请求结束")

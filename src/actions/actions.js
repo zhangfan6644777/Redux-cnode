@@ -38,15 +38,15 @@ let actions = {
 	request_article: (id) => (dispatch, getState) => {
 		let url = `https://cnodejs.org/api/v1/topic/${id}`;
 		if (getState().isFetching) return
+		dispatch(actions.requestArticle())
 		fetch(url).then(function(res) {
-			alert(222)
-				//if (!res.ok) return
-				//dispatch(actions.requestArticle())
+
+			//if (!res.ok) return
+
 			return res.json()
 		}).then(function(data) {
-			if (getState().isFetching) {
-				dispatch(actions.receiveArticle(data.data, id))
-			}
+			dispatch(actions.receiveArticle(data.data, id))
+
 		}).catch(e => alert(111))
 	},
 	requestArticle: (id) => ({
