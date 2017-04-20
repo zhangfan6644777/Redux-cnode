@@ -1,14 +1,12 @@
 {
-    "name": "PickApple",
+    "name": "Redux-cnode",
     "version": "1.0.0",
     "description": "",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start:dev": "webpack-dev-server --hot --inline --devtool eval  --port 8088 --content-base dist --colors",
-        "start:dist": "webpack-dev-server --hot --inline --devtool false --port 8088 --content-base dist --colors --config webpack.prod.config.js",
         "clean": "rimraf dist",
-        "dev": "echo \"Complied in dev mode!\" && npm run clean && webpack -p --progress --colors && npm run start:dev",
-        "build": "echo \"Complied in prod mode!\" && npm run clean && webpack --config webpack.prod.config.js -p --progress --colors && npm run start:dist"
+        "dev": "echo \"Complied in dev mode!\" && npm run clean && webpack -p --progress --colors && npm run start:dev"
     },
     "author": "zhangfan",
     "license": "MIT",

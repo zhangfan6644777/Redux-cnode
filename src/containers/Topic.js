@@ -84,7 +84,7 @@ class HomePage extends React.Component {
 			//中的dispatch  此时正好fetching==false 
 	}
 	scroll(divdom, listdom) {
-		if (divdom.scrollTop + divdom.offsetHeight >= listdom.offsetHeight) {
+		if (divdom.scrollTop + divdom.offsetHeight > listdom.offsetHeight) {
 			this.loadmore();
 		}
 	}

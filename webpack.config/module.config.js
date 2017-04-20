@@ -12,7 +12,7 @@ let EntryConfig = {
 
 let PluginsConfig = [
 	new HtmlWebpackPlugin({
-		title: 'NTTC微路演平台',
+		title: 'Redux-cnode',
 		template: path.join(ROOT_PATH, '/src/blank.html'),
 		filename: 'index.html',
 		//chunks这个参数告诉插件要引用entry里面的哪几个入口
