@@ -48,4 +48,33 @@
 - 方法要绑定bind(this)才可以使用,与es5的React.createClass不同,es5的方式是自动绑定到this上的。
 - 其中箭头函数 扩展运算符和变量解构赋值真的帮助很大,极大的提升效率。
 
+### 截图
+
+![截图](https://github.com/zhangfan6644777/Redux-cnode/blob/master/show/1.png)
+
+![截图](https://github.com/zhangfan6644777/Redux-cnode/blob/master/show/2.png)
+
+![截图](https://github.com/zhangfan6644777/Redux-cnode/blob/master/show/3.png)
+
+![截图](https://github.com/zhangfan6644777/Redux-cnode/blob/master/show/4.png)
+
+![截图](https://github.com/zhangfan6644777/Redux-cnode/blob/master/show/5.png)
+
+![截图](https://github.com/zhangfan6644777/Redux-cnode/blob/master/show/6.png)
+
+![截图](https://github.com/zhangfan6644777/Redux-cnode/blob/master/show/7.png)
+
+![截图](https://github.com/zhangfan6644777/Redux-cnode/blob/master/show/8.png)
+
+![截图](https://github.com/zhangfan6644777/Redux-cnode/blob/master/show/9.png)
+
+![截图](https://github.com/zhangfan6644777/Redux-cnode/blob/master/show/10.png)
+
+![截图](https://github.com/zhangfan6644777/Redux-cnode/blob/master/show/11.png)
+
+![截图](https://github.com/zhangfan6644777/Redux-cnode/blob/master/show/12.png)
+
+![截图](https://github.com/zhangfan6644777/Redux-cnode/blob/master/show/13.png)
+
+![截图](https://github.com/zhangfan6644777/Redux-cnode/blob/master/show/14.png)
 
