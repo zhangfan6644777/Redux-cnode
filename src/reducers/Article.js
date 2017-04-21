@@ -4,6 +4,7 @@ import {
 const TopicReducers = (state = {
 	isFecthing: false,
 	data: {},
+	is_collect: true,
 	upComment: []
 }, action) => {
 	let newState;
@@ -30,6 +31,10 @@ const TopicReducers = (state = {
 			state.hasComment = action.success;
 			newState = Object.assign({}, state);
 			Toast.success('回复成功!!!', 1);
+			return newState
+		case 'COLLECT_ARTICLE':
+			state.data.is_collect = action.success;
+			newState = Object.assign({}, state);
 			return newState
 		default:
 			return state

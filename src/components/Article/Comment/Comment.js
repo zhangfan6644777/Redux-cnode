@@ -62,8 +62,6 @@ class Comment extends React.Component {
 			like,
 			comment
 		} = this.props;
-		console.log(this)
-		console.log('qqqqqqqqqqqqqqqqqq')
 		if (Article.data.reply_count) { //判断数据是否存在 只是一个判断条件
 			Article.data.replies.map(function(index, key) {
 				if (_this.contains(index.ups, Login.id)) {

@@ -1,5 +1,6 @@
 const UserInfoReducers = (state = {
 	isFetching: false,
+	collect: []
 }, action) => {
 	let newState;
 	switch (action.type) {

@@ -42,6 +42,7 @@ class Article extends React.Component {
 		let {
 			Article,
 			Login,
+			UserInfo,
 			dispatch
 		} = this.props;
 		//method("myinfo"); //调用函数，传入参数
@@ -53,7 +54,7 @@ class Article extends React.Component {
 		    		</NavBar>
 				</div>
 
-	    		{Article.data.id?<div style={{marginTop:'90'}}><Content dispatch={dispatch} Login={Login} actions={actions} Article={Article}/><Comment like={this.like} comment={this.comment}  {...({dispatch,actions,Article,Login})}/></div>: <ActivityIndicator size="large" />}
+	    		{Article.data.id?<div style={{marginTop:'90px'}}><Content {...({dispatch,actions,Login,Article,UserInfo})} /><Comment like={this.like} comment={this.comment}  {...({dispatch,actions,Article,Login})}/></div>: <ActivityIndicator size="large" />}
     		</div>
 		)
 	}
@@ -62,11 +63,13 @@ class Article extends React.Component {
 function ArticleSelect(state) {
 	let {
 		Article,
-		Login
-	} = state
+		Login,
+		UserInfo
+	} = state;
 	return {
 		Article,
-		Login
+		Login,
+		UserInfo
 	}
 }
 export default connect(ArticleSelect)(Article)

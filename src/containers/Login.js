@@ -79,6 +79,7 @@ class Login extends React.Component {
 }
 
 function LoginSelect(state) {
+	console.log(state)
 	return {
 		state: state
 	}

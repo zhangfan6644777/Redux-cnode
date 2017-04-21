@@ -47,7 +47,7 @@ let actions = {
 		}).then(function(data) {
 			dispatch(actions.receiveArticle(data.data, id))
 
-		}).catch(e => alert(111))
+		}).catch(e => console.log(e))
 	},
 	requestArticle: (id) => ({
 		type: 'REQUEST_ARTICLE',
@@ -68,7 +68,6 @@ let actions = {
 			})
 			.then(res => res.json())
 			.then(data => {
-				//dispatch(actions())
 				dispatch({
 					type: 'UP_COMMENT',
 					action: data.action,
@@ -78,34 +77,30 @@ let actions = {
 				})
 			})
 	},
-	request_collectArticle: (accessToken, articleId) => (dispatch, getState) => {
-		console.log('接口现在有问题')
-			//return
-		console.log(accessToken)
-		console.log(articleId)
-		let url = `https://cnodejs.org/topic/collect`;
-		let urll = `https://cnodejs.org/api/v1/topic_collect/collect`
+	request_collectArticle: (accessToken, articleId, is_collect) => (dispatch, getState) => {
+		let url = `https://cnodejs.org/api/v1/topic_collect/${is_collect?'de_collect':'collect'}`
 		fetch(url, {
 				method: 'POST',
-				mode: "no-cors",
 				headers: {
-					"Content-Type": "application/json; charset=utf-8"
-						//"Content-Type": "application/x-www-form-urlencoded"
+					"Content-Type": "application/x-www-form-urlencoded"
 				},
-				body: JSON.stringify({
-						accesstoken: accessToken,
-						topic_id: articleId
-					})
-					//body: `accesstoken=${accessToken}&topic_Id=${articleId}`
+				body: `accesstoken=${accessToken}&topic_id=${articleId}`
 			})
 			.then(res => res.json())
 			.then(data => {
-				console.log(data)
-				dispatch({
-					type: 'COLLECT_ARTICLE',
-					success: data.success
-				})
-			})
+				if (data.success && is_collect) {
+					dispatch({ //取消收藏
+						type: 'COLLECT_ARTICLE',
+						success: false
+					})
+				} else {
+					dispatch({ //收藏
+						type: 'COLLECT_ARTICLE',
+						success: true
+					})
+				}
+
+			}).catch(e => console.log(e))
 	},
 	request_commentArticle: (accessToken, topicId, content, replyId) => (dispatch, getState) => {
 		const reply = replyId ? `accesstoken=${accessToken}&content=${content}&replyId=${replyId}` : `accesstoken=${accessToken}&content=${content}`
