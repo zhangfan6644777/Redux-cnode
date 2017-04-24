@@ -26,6 +26,16 @@ class Article extends React.Component {
 		} = this.props;
 		dispatch(actions.request_article(params.id))
 	}
+	componentWillReceiveProps(newProps) {
+		let {
+			dispatch,
+			Article
+		} = newProps;
+		if (Article.hasComment) {
+			//回复消息的逻辑
+			dispatch(actions.request_article(Article.articleId))
+		}
+	}
 	like(accesstoken, commentid, key, indexup, topicid) {
 		const {
 			dispatch

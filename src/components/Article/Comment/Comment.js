@@ -37,18 +37,6 @@ class Comment extends React.Component {
 		}
 		return false;
 	}
-	componentWillReceiveProps(newProps) {
-		console.log(newProps)
-		let {
-			actions,
-			dispatch,
-			Article
-		} = newProps;
-		if (Article.hasComment) {
-			//回复消息的逻辑
-			dispatch(actions.request_article(Article.articleId))
-		}
-	}
 	render() {
 		const {
 			getFieldProps
