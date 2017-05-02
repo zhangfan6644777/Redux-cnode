@@ -10,6 +10,7 @@ let actions = {
 		//dispatch(actions.selectTab(tab))
 		dispatch(actions.requestTopic(tab))
 		fetch(url).then(function(res) {
+			console.log(res)
 			return res.json()
 		}).then(function(data) {
 			dispatch(actions.receiveTopic(tab, data.data, page, limit))
@@ -40,13 +41,14 @@ let actions = {
 		if (getState().isFetching) return
 		dispatch(actions.requestArticle())
 		fetch(url).then(function(res) {
-
-			//if (!res.ok) return
-
+			if (!res.ok) {
+				alert('帖子已经被删除')
+				history.back()
+				return
+			}
 			return res.json()
 		}).then(function(data) {
 			dispatch(actions.receiveArticle(data.data, id))
-
 		}).catch(e => console.log(e))
 	},
 	requestArticle: (id) => ({
