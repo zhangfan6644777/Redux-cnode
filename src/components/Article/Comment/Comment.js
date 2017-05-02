@@ -48,7 +48,8 @@ class Comment extends React.Component {
 			dispatch,
 			actions,
 			like,
-			comment
+			comment,
+			gotoLogin
 		} = this.props;
 		if (Article.data.reply_count) { //判断数据是否存在 只是一个判断条件
 			Article.data.replies.map(function(index, key) {
@@ -143,25 +144,12 @@ class Comment extends React.Component {
 								comment(Login.accesstoken, Article.data.id, content)
 								}}
 							className = "btn" type = "primary" > 回复 < /Button>
-		        		</List>:<div style={{padding:'60px',textAlign:'center'}}>请先<span style={{color:'#108ee9'}} >登录</span>之后再进行操作</div>}
+		        		</List>:<div style={{padding:'60px',textAlign:'center'}}>请先<span onClick={()=>gotoLogin('myinfo')} style={{color:'#108ee9'}} >登录</span>之后再进行操作</div>}
         			</div>
 			)
 		} else {
 			return (<div>
-						{Login.success?
-						<List renderHeader={() => '添加回复'}>
-				            <TextareaItem
-				            	{...getFieldProps('count', {})}
-				            	rows={5}
-				            	count={200}
-				            	clear
-				            />
- 							<Button onClick = {() => {
-								const content = getFieldProps('count').value;
-								comment(Login.accesstoken, Article.data.id, content)
-								}}
-							className = "btn" type = "primary" > 回复 < /Button>
-		        		</List>:<div style={{padding:'60px',textAlign:'center'}}>请先<span style={{color:'#108ee9'}} >登录</span>之后再进行操作</div>}
+		
 			</div>)
 		}
 

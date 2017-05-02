@@ -58,7 +58,11 @@ class Index extends React.Component {
   render() {
     let {
       state
-    } = this.props
+    } = this.props;
+    if (HashMap.get('gotoLogin')) { //评论跳转到登录界面
+      HashMap.put('gotoLogin', false);
+      this.gotoLogin('myinfo');
+    }
     return (
       <TabBar
         unselectedTintColor="#949494"

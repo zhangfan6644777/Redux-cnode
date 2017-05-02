@@ -12,12 +12,15 @@ import {
 	NavBar,
 	Icon
 } from 'antd-mobile';
-let gotoLogin;
+import HashMap from '../utils/HashMapUtils';
+
 class Article extends React.Component {
 	constructor(...arg) {
 		super(...arg);
 		this.like = this.like.bind(this);
 		this.comment = this.comment.bind(this);
+		this.gotoLogin = this.gotoLogin.bind(this);
+		console.log(this)
 	}
 	componentDidMount() {
 		const {
@@ -48,6 +51,10 @@ class Article extends React.Component {
 		} = this.props;
 		dispatch(actions.request_commentArticle(accesstoken, topicid, content, commentid));
 	}
+	gotoLogin() {
+		HashMap.put('gotoLogin', true);
+		history.go(-1);
+	}
 	render() {
 		let {
 			Article,
@@ -55,6 +62,7 @@ class Article extends React.Component {
 			UserInfo,
 			dispatch
 		} = this.props;
+		let gotoLogin = this.gotoLogin;
 		//method("myinfo"); //调用函数，传入参数
 		return (
 			<div>
@@ -64,7 +72,7 @@ class Article extends React.Component {
 		    		</NavBar>
 				</div>
 
-	    		{Article.data.id?<div style={{marginTop:'90px'}}><Content {...({dispatch,actions,Login,Article,UserInfo})} /><Comment like={this.like} comment={this.comment}  {...({dispatch,actions,Article,Login})}/></div>: <ActivityIndicator size="large" />}
+	    		{Article.data.id?<div style={{marginTop:'90px'}}><Content {...({dispatch,actions,Login,Article,UserInfo})} /><Comment like={this.like} comment={this.comment}  {...({dispatch,actions,Article,Login,gotoLogin})}/></div>: <ActivityIndicator size="large" />}
     		</div>
 		)
 	}
