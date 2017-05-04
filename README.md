@@ -28,7 +28,8 @@
 - ```PublishTopic```对应发布文章页面,
 - ```Message```对应账号的消息页面,包括已读消息和未读消息
 - ```Login```对应账号的登录信息
-- ```UserInfo```对应账号的个人信息,还有发布,收藏,参与的话题
+- ```UserInfo```个人信息,还有发布,收藏,参与的话题
+- ```OtherInfo```对应账号的信息,还有发布,收藏,参与的话题
 
 2.代码结构我是模仿[实例讲解基于 React+Redux 的前端开发流程](https://segmentfault.com/a/1190000005356568)去构建的,他的这篇文章我觉得写得非常好,通俗易懂.尤其是对于我这样的小白来说,代码的结构也很容易理解,非常感谢这篇文章带我入门redux,然后这个是我根据这个文章写的demo [Redux-PickApple](https://github.com/zhangfan6644777/Redux-PickApple),欢迎star!!
 
