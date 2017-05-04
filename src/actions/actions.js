@@ -10,7 +10,6 @@ let actions = {
 		//dispatch(actions.selectTab(tab))
 		dispatch(actions.requestTopic(tab))
 		fetch(url).then(function(res) {
-			console.log(res)
 			return res.json()
 		}).then(function(data) {
 			dispatch(actions.receiveTopic(tab, data.data, page, limit))

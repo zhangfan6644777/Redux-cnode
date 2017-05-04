@@ -20,7 +20,6 @@ class Article extends React.Component {
 		this.like = this.like.bind(this);
 		this.comment = this.comment.bind(this);
 		this.gotoLogin = this.gotoLogin.bind(this);
-		console.log(this)
 	}
 	componentDidMount() {
 		const {
@@ -63,12 +62,14 @@ class Article extends React.Component {
 			dispatch
 		} = this.props;
 		let gotoLogin = this.gotoLogin;
+		var aaa = 1;
 		//method("myinfo"); //调用函数，传入参数
 		return (
 			<div>
 				<div style={{position:'fixed',top:0,width:'100%',zIndex:99999}}>
-					<NavBar  onLeftClick={() => history.go(-1)}>
+					<NavBar  onLeftClick={() => history.go(-1)}> 
 						详情
+					}
 		    		</NavBar>
 				</div>
 
