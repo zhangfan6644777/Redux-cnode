@@ -69,8 +69,7 @@ class Article extends React.Component {
 				<div style={{position:'fixed',top:0,width:'100%',zIndex:99999}}>
 					<NavBar  onLeftClick={() => history.go(-1)}> 
 						详情
-					}
-		    		</NavBar>
+		    			</NavBar>
 				</div>
 
 	    		{Article.data.id?<div style={{marginTop:'90px'}}><Content {...({dispatch,actions,Login,Article,UserInfo})} /><Comment like={this.like} comment={this.comment}  {...({dispatch,actions,Article,Login,gotoLogin})}/></div>: <ActivityIndicator size="large" />}
